@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://ubgbb35vfmma"]
+
+[ext_resource type="Texture2D" uid="uid://cf8528tiorwsl" path="res://Panorama_Sky_02-512x512.png" id="1_sv4pk"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gicmm"]
+panorama = ExtResource("1_sv4pk")
+
+[sub_resource type="Sky" id="Sky_2mnp6"]
+sky_material = SubResource("PanoramaSkyMaterial_gicmm")
+
+[sub_resource type="Environment" id="Environment_8ib2y"]
+background_mode = 2
+sky = SubResource("Sky_2mnp6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_nxrhf"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.072463766, 0.2753623, 0.51449275, 0.6956522)
+colors = PackedColorArray(0.6876233, 0.27287987, 0.16739851, 1, 0.5564925, 0.41000372, 0.2543259, 1, 0.17656943, 0.5376774, 0.6432915, 1, 0.52655375, 0.57129896, 0.34245276, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sv4pk"]
+noise_type = 2
+frequency = 0.0481
+fractal_octaves = 4
+cellular_jitter = 7.16
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gicmm"]
+noise = SubResource("FastNoiseLite_sv4pk")
+color_ramp = SubResource("Gradient_nxrhf")
+seamless = true
+seamless_blend_skirt = 0.342
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mnp6"]
+albedo_texture = SubResource("NoiseTexture2D_gicmm")
+
+[sub_resource type="TorusMesh" id="TorusMesh_8ib2y"]
+material = SubResource("StandardMaterial3D_2mnp6")
+
+[sub_resource type="Gradient" id="Gradient_tey05"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.072463766, 0.2753623, 0.51449275, 0.6956522)
+colors = PackedColorArray(0.20756224, 0.49191046, 0.2813959, 1, 0.17109779, 0.48553067, 0.58307266, 1, 0.40859997, 0.48870778, 0.6533022, 1, 0.78901315, 0.41144076, 0.4634092, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uqnih"]
+noise_type = 2
+frequency = 0.0481
+fractal_octaves = 4
+cellular_jitter = 7.16
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x7vq1"]
+noise = SubResource("FastNoiseLite_uqnih")
+color_ramp = SubResource("Gradient_tey05")
+seamless = true
+seamless_blend_skirt = 0.342
+
+[sub_resource type="Gradient" id="Gradient_gicmm"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.072463766, 0.16304348, 0.2753623, 0.40942028, 0.51449275, 0.6956522, 0.8695652)
+colors = PackedColorArray(0.36847892, 0.36847895, 0.36847892, 1, 0.5330367, 0.5330367, 0.5330367, 1, 0.90359825, 0.90359825, 0.9035982, 1, 0.6830775, 0.68307734, 0.68307734, 1, 0.19255567, 0.1925557, 0.19255567, 1, 0.24115604, 0.24115604, 0.24115604, 1, 0.6378432, 0.6378432, 0.6378431, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ib2y"]
+noise = SubResource("FastNoiseLite_uqnih")
+color_ramp = SubResource("Gradient_gicmm")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25qim"]
+albedo_texture = SubResource("NoiseTexture2D_x7vq1")
+metallic = 1.0
+roughness = 0.5
+roughness_texture = SubResource("NoiseTexture2D_8ib2y")
+
+[sub_resource type="PrismMesh" id="PrismMesh_nn3r1"]
+material = SubResource("StandardMaterial3D_25qim")
+
+[sub_resource type="Gradient" id="Gradient_sv4pk"]
+colors = PackedColorArray(0.14553508, 0.28237888, 0.8043747, 1, 0.59897083, 0.77834356, 0.8707799, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gicmm"]
+frequency = 0.1085
+fractal_lacunarity = 1.071
+fractal_gain = 1.506
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2mnp6"]
+height = 64
+noise = SubResource("FastNoiseLite_gicmm")
+color_ramp = SubResource("Gradient_sv4pk")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sv4pk"]
+height = 64
+noise = SubResource("FastNoiseLite_gicmm")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ib2y"]
+albedo_color = Color(0.67203367, 0.8076677, 0.8809252, 1)
+albedo_texture = SubResource("NoiseTexture2D_2mnp6")
+metallic = 1.0
+roughness = 0.4
+normal_enabled = true
+normal_scale = 0.31
+normal_texture = SubResource("NoiseTexture2D_sv4pk")
+
+[sub_resource type="SphereMesh" id="SphereMesh_tey05"]
+material = SubResource("StandardMaterial3D_8ib2y")
+height = 2.5
+
+[node name="Node3D" type="Node3D" unique_id=733525776]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1606967179]
+environment = SubResource("Environment_8ib2y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=948352160]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2139309699]
+transform = Transform3D(0.8443279, -0.32396042, 0.42680207, 0, 0.79652995, 0.6045991, -0.5358268, -0.51048, 0.67253244, 0.9824625, 1.0270581, 1.1330584)
+fov = 60.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1339626182]
+mesh = SubResource("TorusMesh_8ib2y")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2063392673]
+transform = Transform3D(-0.24773549, 0.6949017, -0.6750842, 0.55413544, -0.46994108, -0.6870875, -0.7947081, -0.5443041, -0.26864862, 0.403, 0.21, -0.424)
+mesh = SubResource("PrismMesh_nn3r1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1687224683]
+transform = Transform3D(0.9477684, -0.30735892, 0.085238166, 0, 0.26723835, 0.96363044, -0.31895933, -0.9132985, 0.25328007, 1, -0.46, -0.39)
+mesh = SubResource("SphereMesh_tey05")

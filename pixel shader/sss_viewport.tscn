@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://bsdcph0ot0101"]
+
+[ext_resource type="Script" uid="uid://b2fitchi7hi6g" path="res://pixel shader/pass_events.gd" id="1_68sve"]
+[ext_resource type="Shader" uid="uid://ctsnh8uhilbje" path="res://pixel shader/sss_viewport.gdshader" id="2_5mp2e"]
+[ext_resource type="PackedScene" uid="uid://ubgbb35vfmma" path="res://test scene 1.tscn" id="2_qeviw"]
+[ext_resource type="Shader" uid="uid://b4701yktjnt5c" path="res://pixel shader/palette_lut.gdshader" id="3_mlsp7"]
+[ext_resource type="Texture2D" uid="uid://dkyeqrb8rm33o" path="res://pixel shader/lut line palette 26 2 24.png" id="5_6gknf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_svsq6"]
+shader = ExtResource("2_5mp2e")
+shader_parameter/quantize_size = 1.0
+shader_parameter/handle_scale = false
+shader_parameter/handle_subpixels = true
+shader_parameter/dither_enabled = true
+shader_parameter/bayer_pattern = 1.0
+shader_parameter/divisions = 32.0
+shader_parameter/contrast = 1.0
+shader_parameter/shift = 0.0
+shader_parameter/grayscale = false
+shader_parameter/use_palette = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeviw"]
+shader = ExtResource("3_mlsp7")
+shader_parameter/Palette_LUT = ExtResource("5_6gknf")
+shader_parameter/bayer_pattern = 3.0
+shader_parameter/quantize_size = 4.0
+shader_parameter/handle_scale = false
+shader_parameter/handle_subpixels = true
+
+[node name="Screen Space Shader" type="SubViewportContainer" unique_id=582055958]
+texture_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+script = ExtResource("1_68sve")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=300723425]
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(1152, 648)
+size_2d_override = Vector2i(576, 324)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Node3D" parent="SubViewport" unique_id=733525776 instance=ExtResource("2_qeviw")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1496922916]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1099267635]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="CanvasLayer/Control" unique_id=250271252]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -20.0
+offset_right = -300.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Control2" unique_id=865359810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="bit depth reduction" type="ColorRect" parent="CanvasLayer" unique_id=1621020541]
+visible = false
+material = SubResource("ShaderMaterial_svsq6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="palette lut" type="ColorRect" parent="CanvasLayer" unique_id=1599715191]
+material = SubResource("ShaderMaterial_qeviw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
