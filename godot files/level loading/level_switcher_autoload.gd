@@ -29,7 +29,7 @@ func level_cmd(cmd_name: String, args: PackedStringArray):
 		if args.size() > 1:
 			spawn_index = args[1].to_int()
 		spawn_index = min(spawn_index, len(spawns))
-		var character = load("res://movement/limbo_cc.tscn").instantiate()
+		var character = load("INSERT ACTUAL CHARACTER PATH HERE").instantiate()
 		GsomConsole.get_tree().current_scene.add_child(character)
 		character.position = spawns[0].position
 		
