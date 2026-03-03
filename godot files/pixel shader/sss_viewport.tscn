@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b2fitchi7hi6g" path="res://pixel shader/pass_events.gd" id="1_68sve"]
 [ext_resource type="Shader" uid="uid://ctsnh8uhilbje" path="res://pixel shader/sss_viewport.gdshader" id="2_5mp2e"]
-[ext_resource type="PackedScene" uid="uid://ubgbb35vfmma" path="res://test scene 1.tscn" id="2_qeviw"]
+[ext_resource type="PackedScene" uid="uid://xanr8xfrfg8y" path="res://3d scenes/3d water.tscn" id="2_6gknf"]
 [ext_resource type="Shader" uid="uid://b4701yktjnt5c" path="res://pixel shader/palette_lut.gdshader" id="3_mlsp7"]
-[ext_resource type="Texture2D" uid="uid://dkyeqrb8rm33o" path="res://pixel shader/lut line palette 26 2 24.png" id="5_6gknf"]
+[ext_resource type="Texture2D" uid="uid://dmtbfi3aqtwn2" path="res://pixel shader/lut line palette gawrone mother32.png" id="5_6gknf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_svsq6"]
 shader = ExtResource("2_5mp2e")
@@ -47,7 +47,7 @@ size_2d_override = Vector2i(576, 324)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Node3D" parent="SubViewport" unique_id=733525776 instance=ExtResource("2_qeviw")]
+[node name="Node3D" parent="SubViewport" unique_id=762825275 instance=ExtResource("2_6gknf")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1496922916]
 
