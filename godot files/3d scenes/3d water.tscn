@@ -25,19 +25,14 @@ gradient = SubResource("Gradient_s084f")
 render_priority = 0
 shader = ExtResource("1_s084f")
 shader_parameter/gradient_map = SubResource("GradientTexture1D_jhnen")
+shader_parameter/depth_fade_distance = 10.000000475
+shader_parameter/absorbance = 0.250000011875
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bad0a"]
 material = SubResource("ShaderMaterial_jhnen")
-size = Vector2(50, 200)
+size = Vector2(50, 300)
 subdivide_width = 49
-subdivide_depth = 199
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_s084f"]
-material = SubResource("ShaderMaterial_jhnen")
-flip_faces = true
-size = Vector2(50, 200)
-subdivide_width = 49
-subdivide_depth = 199
+subdivide_depth = 299
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_s084f"]
 top_radius = 15.0
@@ -56,11 +51,6 @@ shadow_enabled = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1005706289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 mesh = SubResource("PlaneMesh_bad0a")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=494858922]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 40)
-visible = false
-mesh = SubResource("PlaneMesh_s084f")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2122309108]
 transform = Transform3D(-1, -1.0654157e-08, 8.677114e-08, 0, 0.99254614, 0.12186935, -8.742278e-08, 0.12186935, -0.99254614, 0, 14, -80)

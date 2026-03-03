@@ -22,8 +22,9 @@ shader_parameter/use_palette = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qeviw"]
 shader = ExtResource("3_mlsp7")
 shader_parameter/Palette_LUT = ExtResource("5_6gknf")
-shader_parameter/bayer_pattern = 3.0
-shader_parameter/quantize_size = 4.0
+shader_parameter/bayer_pattern = 2.0
+shader_parameter/bayer4x4_select = 1
+shader_parameter/quantize_size = 1.0
 shader_parameter/handle_scale = false
 shader_parameter/handle_subpixels = true
 
@@ -42,8 +43,8 @@ script = ExtResource("1_68sve")
 handle_input_locally = false
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(1152, 648)
-size_2d_override = Vector2i(576, 324)
+size = Vector2i(426, 240)
+size_2d_override = Vector2i(320, 240)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 

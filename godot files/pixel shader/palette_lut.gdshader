@@ -8,6 +8,7 @@ uniform sampler2D Palette_LUT : repeat_disable, filter_nearest;
 // The Bayer matrix pattern to use
 // 1 -> 2x2, 2 -> 4x4, 3 -> 8x8
 uniform float bayer_pattern : hint_range(1, 3, 1.0) = 1;
+uniform int bayer4x4_select: hint_range(0, 1, 1.0) = 0;
 
 const int matrix2[4] = {
     0, 2,
@@ -18,6 +19,12 @@ const int matrix4[16] = {
     12, 4,  14, 6,
     3,  11, 1,  9,
     15, 7,  13, 5
+};
+const int matrix4waves[16] = {
+    8, 1, 2, 11,
+	0, 9, 10, 3,
+	4, 13, 14, 7,
+	12, 5, 6, 15
 };
 const int matrix8[64] = {
     0,  32, 8,  40, 2,  34, 10, 42,
@@ -41,7 +48,12 @@ int getBayerValue(float dSize, vec2 in_world_vertex) {
         case 2:
             return matrix2[index];
         case 4:
-            return matrix4[index];
+			switch (bayer4x4_select) {
+				case 0:
+            		return matrix4[index];
+				case 1:
+					return matrix4waves[index];
+			}
         default:
             return matrix8[index];
     }

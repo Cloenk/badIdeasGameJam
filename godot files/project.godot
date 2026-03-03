@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 GsomConsole="*uid://cgiatoqvhisma"
 LevelSwitcher="*uid://bquwnugio1cjn"
 
+[display]
+
+window/size/viewport_width=426
+window/size/viewport_height=240
+
 [global_group]
 
 Spawnpoint="Ordered list of nodes whose position can be selected to spawn the player at within the scene when loading with LevelSwitcher.level_cmd(\"level\", [\"name\", \"index\"]) or GsomConsole.submit(\"level name index\")"
