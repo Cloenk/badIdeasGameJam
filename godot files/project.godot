@@ -1,0 +1,40 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="bad ideas jam"
+run/main_scene="uid://bsdcph0ot0101"
+config/features=PackedStringArray("4.6", "Forward Plus")
+run/max_fps=16
+config/icon="res://icon.svg"
+
+[autoload]
+
+GsomConsole="*uid://cgiatoqvhisma"
+LevelSwitcher="*uid://bquwnugio1cjn"
+
+[display]
+
+window/size/viewport_width=426
+window/size/viewport_height=240
+window/stretch/mode="viewport"
+
+[global_group]
+
+Spawnpoint="Ordered list of nodes whose position can be selected to spawn the player at within the scene when loading with LevelSwitcher.level_cmd(\"level\", [\"name\", \"index\"]) or GsomConsole.submit(\"level name index\")"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"

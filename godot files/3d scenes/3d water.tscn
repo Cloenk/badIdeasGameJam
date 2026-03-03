@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://xanr8xfrfg8y"]
+
+[ext_resource type="Shader" uid="uid://bdrju8i3eybrj" path="res://water_mesh.gdshader" id="1_s084f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s084f"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_jhnen"]
+sky_material = SubResource("ProceduralSkyMaterial_s084f")
+
+[sub_resource type="Environment" id="Environment_bad0a"]
+background_mode = 2
+sky = SubResource("Sky_jhnen")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_s084f"]
+colors = PackedColorArray(0.14653471, 0.027728463, 0.3222454, 1, 0.16640434, 0.42791426, 0.8755781, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jhnen"]
+gradient = SubResource("Gradient_s084f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhnen"]
+render_priority = 0
+shader = ExtResource("1_s084f")
+shader_parameter/gradient_map = SubResource("GradientTexture1D_jhnen")
+shader_parameter/depth_fade_distance = 10.000000475
+shader_parameter/absorbance = 0.250000011875
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bad0a"]
+material = SubResource("ShaderMaterial_jhnen")
+size = Vector2(50, 300)
+subdivide_width = 49
+subdivide_depth = 299
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s084f"]
+top_radius = 15.0
+bottom_radius = 15.0
+height = 10.0
+
+[node name="Node3D" type="Node3D" unique_id=762825275]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=90728856]
+environment = SubResource("Environment_bad0a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=322339665]
+transform = Transform3D(0.55484444, -0.40206876, 0.72834635, 0, 0.87546456, 0.48328236, -0.8319541, -0.2681465, 0.48574665, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1005706289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+mesh = SubResource("PlaneMesh_bad0a")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2122309108]
+transform = Transform3D(-1, -1.0654157e-08, 8.677114e-08, 0, 0.99254614, 0.12186935, -8.742278e-08, 0.12186935, -0.99254614, 0, 14, -80)
+projection = 1
+size = 20.0
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1666890332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+mesh = SubResource("CylinderMesh_s084f")

@@ -1,0 +1,3 @@
+put any level here the player should be able to visit, as this is the directory the level loader system looks
+
+do not put anything here that should not be able to enter with the character such as individual item scenes
