@@ -19,7 +19,8 @@ func _ready() -> void:
 	if not pick_scene:
 		control_2.hide()
 		push_events = true
-		sub_viewport.add_child(scenes[0].instantiate())
+		if sub_viewport.get_child_count() == 0:
+			sub_viewport.add_child(scenes[0].instantiate())
 	else:
 		var index = 0
 		for sc in scenes:
