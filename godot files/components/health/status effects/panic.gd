@@ -13,5 +13,8 @@ func _init() -> void:
 func doStackEffect():
 	damage += 0.5
 
+func removeStack():
+	damage -= 0.5
+
 func tick():
 	host.reduceSanity(damage)

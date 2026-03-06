@@ -13,5 +13,8 @@ func _init() -> void:
 func doStackEffect():
 	damage += 1
 
+func removeStack():
+	damage -= 1
+
 func tick():
 	host.damage(damage)

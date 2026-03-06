@@ -12,5 +12,8 @@ func _init() -> void:
 func doStackEffect():
 	damagePercent += 0.05
 
+func removeStack():
+	damagePercent -= 0.05
+
 func tick():
 	host.damage(host.maxHp * damagePercent)

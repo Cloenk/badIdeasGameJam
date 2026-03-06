@@ -40,6 +40,12 @@ func tick():
 	#do something
 	pass
 
+func removeStack():
+	#remove a stack of the effect
+	if effectLifeTime != 0:
+		stacks -= 1
+		lifetimeTimer.start(effectLifeTime)
+
 func remove():
 	#remove the effect
 	if is_instance_valid(tickTimer):

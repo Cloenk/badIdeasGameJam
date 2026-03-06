@@ -4,7 +4,7 @@ class_name Health
 @export var maxHp: float = 10
 @export var damageTakenMultipler: float = 1
 @export var healMultiplier: float = 1
-@export var maxSanity: float = 10
+@export var maxSanity: float = 0
 @export var sanityReductionMultiplier: float = 1
 @export var sanityAdditionMultiplier: float = 1
 
@@ -60,5 +60,8 @@ func addStatusEffect(statusEffect: StatusEffect,stackAmount: float):
 			statusEffect.apply()
 
 func removeStatusEffect(statusEffect: StatusEffect):
-	statusEffect.remove()
-	statusEffects.erase(statusEffect)
+	if statusEffect.stacks > 1:
+		statusEffect.removeStack()
+	else:
+		statusEffect.remove()
+		statusEffects.erase(statusEffect)
