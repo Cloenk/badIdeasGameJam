@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://di43vh57c2qsh"]
+
+[ext_resource type="Script" uid="uid://ct5j8y8xgpaed" path="res://components/health/health_test_scene.gd" id="1_yffsx"]
+[ext_resource type="PackedScene" uid="uid://dl4uofo6yskw8" path="res://components/health/health.tscn" id="2_yifra"]
+
+[node name="healthTestScene" type="Node2D" unique_id=672070493]
+script = ExtResource("1_yffsx")
+
+[node name="Health" parent="." unique_id=867326038 instance=ExtResource("2_yifra")]
+
+[node name="hpLabel" type="Label" parent="." unique_id=2119636226]
+offset_left = 127.0
+offset_top = 20.0
+offset_right = 212.0
+offset_bottom = 57.0
+text = "hp = x"
+
+[node name="StatusLabel" type="Label" parent="." unique_id=825360165]
+offset_left = 7.0
+offset_top = 56.0
+offset_right = 423.0
+offset_bottom = 114.0
+text = "hp ="
+autowrap_mode = 3
+
+[node name="Damage button" type="Button" parent="." unique_id=51897599]
+offset_left = 65.0
+offset_top = 201.0
+offset_right = 135.0
+offset_bottom = 232.0
+text = "damage"
+
+[node name="Heal button" type="Button" parent="." unique_id=2115694566]
+offset_left = 138.0
+offset_top = 201.0
+offset_right = 208.0
+offset_bottom = 232.0
+text = "heal"
+
+[connection signal="pressed" from="Damage button" to="." method="_on_damage_button_pressed"]
+[connection signal="pressed" from="Heal button" to="." method="_on_heal_button_pressed"]
