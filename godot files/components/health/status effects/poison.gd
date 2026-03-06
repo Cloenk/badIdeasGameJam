@@ -13,6 +13,7 @@ func doStackEffect():
 	damagePercent += 0.05
 
 func removeStack():
+	super()
 	damagePercent -= 0.05
 
 func tick():

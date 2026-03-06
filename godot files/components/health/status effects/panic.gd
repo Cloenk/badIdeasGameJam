@@ -14,6 +14,7 @@ func doStackEffect():
 	damage += 0.5
 
 func removeStack():
+	super()
 	damage -= 0.5
 
 func tick():

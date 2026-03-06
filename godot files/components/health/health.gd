@@ -4,7 +4,6 @@ class_name Health
 @export var maxHp: float = 10
 @export var damageTakenMultipler: float = 1
 @export var healMultiplier: float = 1
-@export var maxSanity: float = 0
 @export var sanityReductionMultiplier: float = 1
 @export var sanityAdditionMultiplier: float = 1
 
@@ -15,7 +14,6 @@ var statusEffects: Array[StatusEffect]
 func _ready() -> void:
 	#set the hp and sanity to their max
 	hp = maxHp
-	sanity = maxSanity
 
 func damage(amount: float): #damages the thingymajig
 	amount *= damageTakenMultipler
@@ -42,9 +40,7 @@ func reduceSanity(amount: float): #same as damages but with sanity
 
 func addSanity(amount: float): #same as heal but with sanity :o
 	amount *= sanityAdditionMultiplier
-	maxSanity += amount
-	if maxSanity > maxSanity:
-		maxSanity = maxSanity
+	sanity += amount
 
 func addStatusEffect(statusEffect: StatusEffect,stackAmount: float):
 	for a in stackAmount:
