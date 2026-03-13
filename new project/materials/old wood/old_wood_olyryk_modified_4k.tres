@@ -1,0 +1,14 @@
+[gd_resource type="ORMMaterial3D" load_steps=4 format=3 uid="uid://bocc2w6kt2aty"]
+
+[ext_resource type="Texture2D" uid="uid://lo0ewtl2s8ta" path="res://materials/old wood/old_wood_olyryk_modified_4k_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://csfot2ri2eaj" path="res://materials/old wood/old_wood_olyryk_modified_4k_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://hr3efhcjisxl" path="res://materials/old wood/old_wood_olyryk_modified_4k_normal.png" id="3"]
+
+[resource]
+albedo_color = Color(0.27576295, 0.23404533, 0.15046215, 1)
+albedo_texture = ExtResource("1")
+orm_texture = ExtResource("2")
+normal_enabled = true
+normal_texture = ExtResource("3")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true

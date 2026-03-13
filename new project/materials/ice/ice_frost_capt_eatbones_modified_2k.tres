@@ -1,0 +1,17 @@
+[gd_resource type="ORMMaterial3D" load_steps=5 format=3 uid="uid://b282f6tleqruc"]
+
+[ext_resource type="Texture2D" uid="uid://do6mfoci2croi" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cc34odfhoyfys" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bhe440g52bb7k" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k_normal.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://d3ge2rgufgidm" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k_sss.png" id="6"]
+
+[resource]
+albedo_texture = ExtResource("1")
+orm_texture = ExtResource("2")
+normal_enabled = true
+normal_texture = ExtResource("3")
+subsurf_scatter_strength = 0.5
+subsurf_scatter_texture = ExtResource("6")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 10.0
