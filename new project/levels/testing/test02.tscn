@@ -4,7 +4,6 @@
 [ext_resource type="Material" uid="uid://bmjgmchfvwf3k" path="res://materials/flat concrete/concrete_01_yosoyfreeman_2k.tres" id="2_0iojf"]
 [ext_resource type="Script" uid="uid://c68dxahp0v5xg" path="res://addons/csg_toolkit/scripts/csg_repeater_3d.gd" id="3_q20v2"]
 [ext_resource type="PackedScene" uid="uid://s3fu5mxyqla6" path="res://text_mesh_array.tscn" id="4_fqvii"]
-[ext_resource type="PackedScene" uid="uid://b2yxnuipe2d8x" path="res://level utils/thrower_wheel.tscn" id="5_jk28t"]
 [ext_resource type="PackedScene" uid="uid://b4hlld3ktldfk" path="res://test assets/house 1.glb" id="6_e0ndo"]
 [ext_resource type="Material" uid="uid://b282f6tleqruc" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k.tres" id="7_i1f57"]
 
@@ -275,18 +274,6 @@ size = Vector3(2, 40, 31)
 
 [node name="spawnpoint" type="Marker3D" parent="." unique_id=1870199116 groups=["Spawnpoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 10)
-
-[node name="Thrower Wheel" parent="." unique_id=1763181988 instance=ExtResource("5_jk28t")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, -14)
-
-[node name="Thrower Wheel2" parent="." unique_id=526247594 instance=ExtResource("5_jk28t")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, -21)
-
-[node name="Thrower Wheel3" parent="." unique_id=15781291 instance=ExtResource("5_jk28t")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, -28)
-
-[node name="Thrower Wheel4" parent="." unique_id=1110980399 instance=ExtResource("5_jk28t")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, -35)
 
 [node name="house 1" parent="." unique_id=1422429980 instance=ExtResource("6_e0ndo")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, 17)

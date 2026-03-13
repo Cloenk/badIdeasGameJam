@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="state machine char controller"
+config/name="bad ideas game jam puzzle box thing"
 run/main_scene="uid://qmj27lex0mjc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
