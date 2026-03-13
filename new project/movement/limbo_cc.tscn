@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://dnbss4ftqksli"]
+
+[ext_resource type="Script" uid="uid://dhrydfl3wo17v" path="res://movement/limbo_cc.gd" id="1_8regx"]
+[ext_resource type="PackedScene" uid="uid://hl8invlcxyuh" path="res://cameras/camera.tscn" id="1_sstgl"]
+[ext_resource type="Script" uid="uid://d1q7qkkr78mg0" path="res://PID Controller/pid_controller.gd" id="2_cg6sr"]
+[ext_resource type="Script" uid="uid://c24inuhdbui52" path="res://movement/limbo_cc_scripts/movement.gd" id="2_sstgl"]
+[ext_resource type="Script" uid="uid://b10jt332ej1p" path="res://movement/limbo_cc_scripts/walk_run.gd" id="3_8regx"]
+[ext_resource type="Script" uid="uid://bo41ytii8fwh1" path="res://movement/limbo_cc_scripts/idle.gd" id="3_cg6sr"]
+[ext_resource type="Script" uid="uid://c8iinib0m0lsh" path="res://movement/limbo_cc_scripts/crouch.gd" id="4_cg6sr"]
+[ext_resource type="Script" uid="uid://dq858j5bnmwtm" path="res://movement/limbo_cc_scripts/crawl.gd" id="5_fvj4u"]
+[ext_resource type="Script" uid="uid://da3114yn1m1yy" path="res://movement/limbo_cc_scripts/wall_sneak.gd" id="6_ywe5y"]
+[ext_resource type="Script" uid="uid://d2b6jc2qmybf0" path="res://movement/limbo_cc_scripts/wall_sneak_crouch.gd" id="8_sstgl"]
+[ext_resource type="Script" uid="uid://csfxdtbqgb7ig" path="res://movement/limbo_cc_scripts/hang_move.gd" id="9_4yp1g"]
+[ext_resource type="Script" uid="uid://b7sn1wn7apybe" path="res://movement/limbo_cc_scripts/fall_land.gd" id="9_ikm8p"]
+[ext_resource type="Script" uid="uid://px0oaxvephqf" path="res://movement/limbo_cc_scripts/freefall.gd" id="11_5al2k"]
+[ext_resource type="Script" uid="uid://evmd00jll4hq" path="res://movement/limbo_cc_scripts/glide.gd" id="12_tguxa"]
+[ext_resource type="Script" uid="uid://felfw7ml6hyo" path="res://movement/limbo_cc_scripts/ledge_climb.gd" id="15_fvj4u"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8regx"]
+friction = 0.3
+bounce = 0.5
+absorbent = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g5xe8"]
+radius = 0.35
+height = 1.724231
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cg6sr"]
+radius = 0.32
+height = 0.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cg6sr"]
+radius = 0.35
+height = 1.75
+
+[sub_resource type="PrismMesh" id="PrismMesh_cg6sr"]
+size = Vector3(0.5, 0.5, 0.25)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ywe5y"]
+radius = 0.4
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_cg6sr"]
+var/wish_dir/name = &"wish_dir"
+var/wish_dir/type = 9
+var/wish_dir/value = Vector3(0, 0, 0)
+var/wish_dir/hint = 0
+var/wish_dir/hint_string = ""
+
+[sub_resource type="Resource" id="Resource_cg6sr"]
+script = ExtResource("2_cg6sr")
+p_coef = 2.0
+i_coef = 0.1
+d_coef = 0.5
+integral_clamp = 2.0
+smooth_derivative = 0.1
+metadata/_custom_type_script = "uid://d1q7qkkr78mg0"
+
+[node name="LimboCC" type="RigidBody3D" unique_id=435582750]
+collision_layer = 2
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 75.0
+physics_material_override = SubResource("PhysicsMaterial_8regx")
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 20
+script = ExtResource("1_8regx")
+
+[node name="shape_body" type="CollisionShape3D" parent="." unique_id=1578955147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8878845, 0)
+shape = SubResource("CapsuleShape3D_g5xe8")
+
+[node name="shape_feet" type="CollisionShape3D" parent="." unique_id=402370835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CapsuleShape3D_cg6sr")
+
+[node name="Camera" parent="." unique_id=1114308857 instance=ExtResource("1_sstgl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58, 0)
+
+[node name="Faceforward" type="Node3D" parent="." unique_id=2074333729]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Faceforward" unique_id=784467040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+mesh = SubResource("CapsuleMesh_cg6sr")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Faceforward" unique_id=196532074]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.3449031, -0.45185775)
+mesh = SubResource("PrismMesh_cg6sr")
+skeleton = NodePath("../..")
+
+[node name="Climb Shapecast" type="ShapeCast3D" parent="Faceforward" unique_id=1040085221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.5)
+enabled = false
+shape = SubResource("CapsuleShape3D_ywe5y")
+exclude_parent = false
+target_position = Vector3(0, -1.3, 0)
+margin = 0.05
+max_results = 8
+
+[node name="Movement" type="LimboHSM" parent="." unique_id=798909399]
+update_mode = 2
+blackboard_plan = SubResource("BlackboardPlan_cg6sr")
+script = ExtResource("2_sstgl")
+pid_velocity = SubResource("Resource_cg6sr")
+
+[node name="Idle" type="LimboState" parent="Movement" unique_id=1268341757]
+script = ExtResource("3_cg6sr")
+
+[node name="WalkRun" type="LimboState" parent="Movement" unique_id=282406936]
+script = ExtResource("3_8regx")
+
+[node name="Crouch" type="LimboState" parent="Movement" unique_id=744994289]
+script = ExtResource("4_cg6sr")
+
+[node name="Crawl" type="LimboState" parent="Movement" unique_id=1458393132]
+script = ExtResource("5_fvj4u")
+
+[node name="WallSneak" type="LimboState" parent="Movement" unique_id=1428647410]
+script = ExtResource("6_ywe5y")
+
+[node name="WallSneakCrouch" type="LimboState" parent="Movement" unique_id=184265168]
+script = ExtResource("8_sstgl")
+
+[node name="HangMove" type="LimboState" parent="Movement" unique_id=106076290]
+script = ExtResource("9_4yp1g")
+
+[node name="FallLand" type="LimboState" parent="Movement" unique_id=1016786369]
+script = ExtResource("9_ikm8p")
+
+[node name="Freefall" type="LimboState" parent="Movement" unique_id=772558930]
+script = ExtResource("11_5al2k")
+
+[node name="Glide" type="LimboState" parent="Movement" unique_id=702246674]
+script = ExtResource("12_tguxa")
+
+[node name="LedgeClimb" type="LimboState" parent="Movement" unique_id=671497931]
+script = ExtResource("15_fvj4u")
+
+[connection signal="body_shape_entered" from="." to="Movement" method="_on_body_shape_entered"]
+[connection signal="body_shape_exited" from="." to="Movement" method="_on_body_shape_exited"]
