@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://s3fu5mxyqla6" path="res://debug utils/text_mesh_array.tscn" id="4_fqvii"]
 [ext_resource type="PackedScene" uid="uid://b4hlld3ktldfk" path="res://test assets/house 1.glb" id="6_e0ndo"]
 [ext_resource type="Material" uid="uid://b282f6tleqruc" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k.tres" id="7_i1f57"]
+[ext_resource type="PackedScene" uid="uid://bl2emus6ngcot" path="res://interactables/Button.tscn" id="7_tik32"]
 
 [sub_resource type="Environment" id="Environment_0iojf"]
 background_mode = 2
@@ -49,6 +50,36 @@ size = Vector3(20, 4, 4)
 [sub_resource type="BoxMesh" id="BoxMesh_tik32"]
 material = ExtResource("7_i1f57")
 size = Vector3(20, 4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1f57"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i1f57"]
+material = SubResource("StandardMaterial3D_i1f57")
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tik32"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c02y3"]
+material = SubResource("StandardMaterial3D_tik32")
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40rbn"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ljpex"]
+material = SubResource("StandardMaterial3D_40rbn")
+radial_segments = 8
+rings = 2
 
 [node name="Test02" type="Node3D" unique_id=1819271865]
 
@@ -272,6 +303,15 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -24.5)
 size = Vector3(2, 40, 31)
 
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=389717506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+size = Vector3(2, 2, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=825033990]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 1.3161532, -0.18209028)
+operation = 2
+size = Vector3(4, 1, 4)
+
 [node name="spawnpoint" type="Marker3D" parent="." unique_id=1870199116 groups=["Spawnpoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 10)
 
@@ -297,3 +337,37 @@ shape = SubResource("BoxShape3D_i1f57")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=53056715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = SubResource("BoxMesh_tik32")
+
+[node name="button demo" type="Node3D" parent="." unique_id=992048660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 6)
+
+[node name="Button 1" parent="button demo" unique_id=649458515 instance=ExtResource("7_tik32")]
+transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, 0.5, -0.1487633, 0.010089874)
+rel_to_last = false
+rel_from_this_position = true
+rel_from_this_full = false
+
+[node name="Button 2" parent="button demo" unique_id=1697206777 instance=ExtResource("7_tik32")]
+transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, 0, -0.1487633, 0.010089874)
+rel_to_last = false
+rel_from_this_position = true
+rel_from_this_full = false
+
+[node name="Button 3" parent="button demo" unique_id=1043352339 instance=ExtResource("7_tik32")]
+transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, -0.5, -0.1487633, 0.010089874)
+new_position = Vector3(0.4, 1.27, 0.34)
+rel_to_last = false
+rel_from_this_position = true
+rel_from_this_full = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="button demo" unique_id=1375406689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 2)
+mesh = SubResource("CapsuleMesh_i1f57")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="button demo" unique_id=990304828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+mesh = SubResource("CapsuleMesh_c02y3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="button demo" unique_id=1836142867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
+mesh = SubResource("CapsuleMesh_ljpex")
