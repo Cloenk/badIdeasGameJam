@@ -102,6 +102,7 @@ climb={
 
 3d_physics/layer_1="static geometry"
 3d_physics/layer_2="player"
+3d_physics/layer_3="clickable"
 3d_physics/layer_4="climbable"
 
 [physics]
