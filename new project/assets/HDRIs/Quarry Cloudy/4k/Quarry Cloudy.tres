@@ -1,0 +1,9 @@
+[gd_resource type="Sky" format=3 uid="uid://bn4xbng72x53t"]
+
+[ext_resource type="Texture2D" uid="uid://djb0sm4mrwlnm" path="res://assets/HDRIs/Quarry Cloudy/4k/Quarry Cloudy.exr" id="1_enpfo"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_enpfo"]
+panorama = ExtResource("1_enpfo")
+
+[resource]
+sky_material = SubResource("PanoramaSkyMaterial_enpfo")

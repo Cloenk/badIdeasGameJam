@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bl2emus6ngcot"]
+
+[ext_resource type="Script" uid="uid://p8gb85u67b8f" path="res://interactables/button.gd" id="1_fokac"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ut530"]
+height = 0.05
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ut530"]
+shading_mode = 2
+diffuse_mode = 2
+specular_mode = 2
+albedo_color = Color(0.9277645, 0.30354458, 0.29494894, 1)
+metallic = 0.55
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ut530"]
+material = SubResource("StandardMaterial3D_ut530")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.05
+radial_segments = 12
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fokac"]
+material = SubResource("StandardMaterial3D_ut530")
+top_radius = 0.043
+bottom_radius = 0.05
+height = 0.01
+radial_segments = 12
+rings = 1
+cap_bottom = false
+
+[sub_resource type="FontVariation" id="FontVariation_ut530"]
+variation_embolden = 0.05
+
+[sub_resource type="TextMesh" id="TextMesh_ut530"]
+text = "click
+me"
+font = SubResource("FontVariation_ut530")
+font_size = 4
+uppercase = true
+line_spacing = -2.8
+curve_step = 10.0
+depth = 0.02
+
+[node name="Button" type="StaticBody3D" unique_id=649458515]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_fokac")
+transforms = Array[Transform3D]([Transform3D(0.30864984, 0.21265557, -0.13968857, 0, -0.21960913, -0.33432296, -0.2544313, 0.25797185, -0.1694558, 1.08, 0.64, 0), Transform3D(0.869495, -0.4939419, 0, 0.4939419, 0.869495, 0, 0, 0, 1, -1.83, 0.75, 0)])
+show_all_transforms = true
+rel_from_this_rotation = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1470735436]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ut530")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1720905638]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ut530")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1873013169]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.029886719)
+mesh = SubResource("CylinderMesh_fokac")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1765593535]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 1, 0.0019505024, -0.009264689, 0.026)
+mesh = SubResource("TextMesh_ut530")

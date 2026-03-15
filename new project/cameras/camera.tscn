@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://hl8invlcxyuh"]
+
+[ext_resource type="Script" uid="uid://cr82ybl4rl6yg" path="res://cameras/camera.gd" id="1_tf3c0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifya2"]
+shading_mode = 0
+disable_ambient_light = true
+albedo_color = Color(1, 0, 1, 1)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kjskr"]
+material = SubResource("StandardMaterial3D_ifya2")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 1.0
+radial_segments = 4
+rings = 1
+cap_top = false
+
+[node name="Camera" type="Node3D"]
+script = ExtResource("1_tf3c0")
+
+[node name="Rotate" type="Node3D" parent="."]
+
+[node name="Flip" type="Node3D" parent="Rotate"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Rotate/Flip"]
+
+[node name="CameraThirdPerson" type="Camera3D" parent="Rotate/Flip/SpringArm3D"]
+
+[node name="AimRaycast" type="RayCast3D" parent="Rotate/Flip/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
+target_position = Vector3(0, -10000, 0)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Rotate/Flip/SpringArm3D"]
+current = true
+
+[node name="FirstPerson" type="Node3D" parent="Rotate/Flip"]
+
+[node name="CameraFirstPerson" type="Camera3D" parent="Rotate/Flip/FirstPerson"]
+cull_mask = 1048573
+current = true
+fov = 90.0
+
+[node name="HoldPosition" type="Node3D" parent="Rotate/Flip/FirstPerson"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="AimDebugPointer" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="AimDebugPointer_internal" type="MeshInstance3D" parent="AimDebugPointer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_kjskr")

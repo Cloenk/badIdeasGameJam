@@ -1,0 +1,375 @@
+[gd_scene format=3 uid="uid://bvx2owmfeca30"]
+
+[ext_resource type="Sky" uid="uid://bn4xbng72x53t" path="res://assets/HDRIs/Quarry Cloudy/4k/Quarry Cloudy.tres" id="1_l7j0p"]
+[ext_resource type="Material" uid="uid://bmjgmchfvwf3k" path="res://materials/flat concrete/concrete_01_yosoyfreeman_2k.tres" id="2_0iojf"]
+[ext_resource type="Script" uid="uid://c68dxahp0v5xg" path="res://addons/csg_toolkit/scripts/csg_repeater_3d.gd" id="3_q20v2"]
+[ext_resource type="PackedScene" uid="uid://s3fu5mxyqla6" path="res://debug utils/text_mesh_array.tscn" id="4_fqvii"]
+[ext_resource type="PackedScene" uid="uid://b4hlld3ktldfk" path="res://test assets/house 1.glb" id="6_e0ndo"]
+[ext_resource type="Material" uid="uid://b282f6tleqruc" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k.tres" id="7_i1f57"]
+[ext_resource type="PackedScene" uid="uid://bl2emus6ngcot" path="res://interactables/Button.tscn" id="7_tik32"]
+
+[sub_resource type="Environment" id="Environment_0iojf"]
+background_mode = 2
+sky = ExtResource("1_l7j0p")
+tonemap_mode = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0iojf"]
+shading_mode = 2
+disable_ambient_light = true
+albedo_color = Color(0.3533419, 0.5866379, 0.18971977, 1)
+metallic_specular = 1.0
+emission_enabled = true
+emission = Color(0.18543065, 0.28558776, 0.11389498, 1)
+disable_receive_shadows = true
+
+[sub_resource type="TextMesh" id="TextMesh_5wk48"]
+material = SubResource("StandardMaterial3D_0iojf")
+text = "5°"
+pixel_size = 0.1
+depth = 0.25
+
+[sub_resource type="TextMesh" id="TextMesh_ldcrw"]
+material = SubResource("StandardMaterial3D_0iojf")
+text = "5°"
+font_size = 8
+pixel_size = 0.1
+depth = 0.25
+
+[sub_resource type="TextMesh" id="TextMesh_0iojf"]
+material = SubResource("StandardMaterial3D_0iojf")
+text = "5°"
+pixel_size = 0.1
+depth = 0.25
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e0ndo"]
+friction = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1f57"]
+size = Vector3(20, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tik32"]
+material = ExtResource("7_i1f57")
+size = Vector3(20, 4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1f57"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i1f57"]
+material = SubResource("StandardMaterial3D_i1f57")
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tik32"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c02y3"]
+material = SubResource("StandardMaterial3D_tik32")
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40rbn"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ljpex"]
+material = SubResource("StandardMaterial3D_40rbn")
+radial_segments = 8
+rings = 2
+
+[node name="Test02" type="Node3D" unique_id=1819271865]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1922117646]
+transform = Transform3D(0.27336547, 0.95236444, -0.13517825, -0.030952355, 0.14916737, 0.9883274, 0.96141213, -0.26599044, 0.070255116, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=256787907]
+environment = SubResource("Environment_0iojf")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=2078357122]
+material_override = ExtResource("2_0iojf")
+use_collision = true
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=531440857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+size = Vector3(500, 50, 500)
+
+[node name="slope test" type="CSGCombiner3D" parent="CSGCombiner3D" unique_id=201212959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 20)
+
+[node name="CSGCombiner3D13" type="CSGCombiner3D" parent="CSGCombiner3D/slope test" unique_id=1277170769]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=995239220]
+transform = Transform3D(1, 0, 0, 0, 0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D" unique_id=157442348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 25)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=209279107]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 6, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D2" unique_id=1739147118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 25)
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=1908664529]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 12, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D3" unique_id=1944314379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 25)
+
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=607283776]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 18, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D4" unique_id=849934692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 25)
+
+[node name="CSGCombiner3D5" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=1693866994]
+transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 24, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D5" unique_id=1413036674]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 30)
+
+[node name="CSGCombiner3D6" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=1778209930]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 30, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D6" unique_id=1553899461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 30)
+
+[node name="CSGCombiner3D7" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=381085554]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 36, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D7" unique_id=1838992860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 30)
+
+[node name="CSGCombiner3D8" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=1125796603]
+transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 42, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D8" unique_id=2066841304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 35)
+
+[node name="CSGCombiner3D9" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=2122157218]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 48, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D9" unique_id=37978182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 40)
+
+[node name="CSGCombiner3D10" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=1095327382]
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 54, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D10" unique_id=523820617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 45)
+
+[node name="CSGCombiner3D11" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=262503167]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 60, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D11" unique_id=100564454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 55)
+
+[node name="CSGCombiner3D12" type="CSGCombiner3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13" unique_id=288123790]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 66, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test/CSGCombiner3D13/CSGCombiner3D12" unique_id=1318499814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10)
+size = Vector3(4, 2, 60)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/slope test" unique_id=579878638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 10)
+operation = 1
+size = Vector3(200, 50, 20)
+
+[node name="TextMeshArray" parent="CSGCombiner3D/slope test" unique_id=989527969 node_paths=PackedStringArray("geo_instance_for_settings") instance=ExtResource("4_fqvii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 1)
+geo_instance_for_settings = NodePath("../../stair height test/MeshInstance3D")
+text_mesh = SubResource("TextMesh_5wk48")
+strings = Array[String](["5°", "10°", "15°", "20°", "25°", "30°", "35°", "40°", "45°", "50°", "55°", "60°"])
+offset = Vector3(6, 0, 0)
+
+[node name="stair height test" type="CSGCombiner3D" parent="CSGCombiner3D" unique_id=137049417]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test" unique_id=556964356]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D" unique_id=1534918806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D" unique_id=1331403742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.02, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test" unique_id=700101369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D2" unique_id=339049400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.46, 0)
+size = Vector3(2, 3, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D2" unique_id=1569228963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.46, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.04, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test" unique_id=2107579346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D3" unique_id=577979316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D3" unique_id=304625840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.06, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test" unique_id=1510572105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D4" unique_id=2006108045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D4" unique_id=191632297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.08, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D5" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test" unique_id=266405765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D5" unique_id=22056568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="CSGCombiner3D/stair height test/CSGCombiner3D5" unique_id=1200148693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.1, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/stair height test" unique_id=1856913457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1.5, -2)
+operation = 1
+size = Vector3(97, 12, 6)
+
+[node name="TextMeshArray" parent="CSGCombiner3D/stair height test" unique_id=1274874388 node_paths=PackedStringArray("geo_instance_for_settings") instance=ExtResource("4_fqvii")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 4, -1)
+geo_instance_for_settings = NodePath("../MeshInstance3D")
+text_mesh = SubResource("TextMesh_ldcrw")
+strings = Array[String](["0.02", "0.04", "0.06", "0.08", "0.10", "0.12", "0.14", "0.16", "0.18", "0.20", "0.22", "0.24", "0.26", "0.28", "0.30", "0.32", "0.34", "0.36", "0.38", "0.40", "0.42", "0.44", "0.46", "0.48", "0.50", "0.52", "0.54", "0.56", "0.58", "0.60"])
+offset = Vector3(-3, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CSGCombiner3D/stair height test" unique_id=978152545]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 20, 4, 21)
+visible = false
+mesh = SubResource("TextMesh_0iojf")
+skeleton = NodePath("")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1852605641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -24.5)
+size = Vector3(2, 40, 31)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=389717506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+size = Vector3(2, 2, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=825033990]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 1.3161532, -0.18209028)
+operation = 2
+size = Vector3(4, 1, 4)
+
+[node name="spawnpoint" type="Marker3D" parent="." unique_id=1870199116 groups=["Spawnpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 10)
+
+[node name="house 1" parent="." unique_id=1422429980 instance=ExtResource("6_e0ndo")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, 17)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1143021894]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 31, 1, 10)
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.0
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_length = 20.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=992167077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0.1, 10)
+physics_material_override = SubResource("PhysicsMaterial_e0ndo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=245233505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_i1f57")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=53056715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_tik32")
+
+[node name="button demo" type="Node3D" parent="." unique_id=992048660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 6)
+
+[node name="Button 1" parent="button demo" unique_id=649458515 instance=ExtResource("7_tik32")]
+transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, 0.5, -0.1487633, 0.010089874)
+transform_relative_position = true
+transforms = Array[Transform3D]([Transform3D(0.30864984, 0.21265557, -0.13968857, 0, -0.21960913, -0.33432296, -0.2544313, 0.25797185, -0.1694558, 1.08, 0.64, 0), Transform3D(0.869495, -0.4939419, 0, 0.4939419, 0.869495, 0, 0, 0, 1, -1.83, 0.75, 0), Transform3D(0.869495, -0.4939419, 0, 0.4939419, 0.869495, 0, 0, 0, 1, 0.46546686, 2.0540066, 0), Transform3D(0.817058, -0.49394187, 0.29738477, 0.46415356, 0.869495, 0.16893807, -0.34202012, -1.0192994e-08, 0.9396927, -2.6598225, 2.2107515, 0), Transform3D(0.66607183, -0.49394184, 0.5589006, 0.37838143, 0.869495, 0.31749973, -0.6427876, -2.4438355e-08, 0.7660445, -3.4896448, 3.671503, -1.5121076e-08)])
+new_position = Vector3(0, 1.68, 0)
+new_rotation = Vector3(0, 0.34906584, 0)
+rel_to_last = true
+rel_from_this_position = false
+rel_from_this_rotation = false
+
+[node name="Button 2" parent="button demo" unique_id=1697206777 instance=ExtResource("7_tik32")]
+transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, 0, -0.1487633, 0.010089874)
+transform_relative_position = true
+
+[node name="Button 3" parent="button demo" unique_id=1043352339 instance=ExtResource("7_tik32")]
+transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, -0.5, -0.1487633, 0.010089874)
+new_position = Vector3(0.4, 1.27, 0.34)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="button demo" unique_id=1375406689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 2)
+visible = false
+mesh = SubResource("CapsuleMesh_i1f57")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="button demo" unique_id=990304828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+visible = false
+mesh = SubResource("CapsuleMesh_c02y3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="button demo" unique_id=1836142867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
+visible = false
+mesh = SubResource("CapsuleMesh_ljpex")
