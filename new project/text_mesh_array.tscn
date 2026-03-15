@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://s3fu5mxyqla6"]
-
-[ext_resource type="Script" uid="uid://crdwddrplcpsn" path="res://text_mesh_array.gd" id="1_uwmcn"]
-
-[node name="TextMeshArray" type="Node3D"]
-script = ExtResource("1_uwmcn")
