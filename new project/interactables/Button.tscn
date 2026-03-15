@@ -50,9 +50,9 @@ depth = 0.02
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_fokac")
-rel_to_last = null
-rel_from_this_position = null
-rel_from_this_full = null
+transforms = Array[Transform3D]([Transform3D(0.30864984, 0.21265557, -0.13968857, 0, -0.21960913, -0.33432296, -0.2544313, 0.25797185, -0.1694558, 1.08, 0.64, 0), Transform3D(0.869495, -0.4939419, 0, 0.4939419, 0.869495, 0, 0, 0, 1, -1.83, 0.75, 0)])
+show_all_transforms = true
+rel_from_this_rotation = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1470735436]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
