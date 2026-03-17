@@ -343,6 +343,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 6)
 [node name="Button 1" parent="button demo" unique_id=649458515 instance=ExtResource("7_tik32")]
 transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.86602545, 1.509958e-07, 0.86602545, -0.49999997, 0.5, -0.1487633, 0.010089874)
 nodepath = NodePath("../MeshInstance3D")
+mode = 1
 transform_relative_position = true
 transforms = Array[Transform3D]([Transform3D(0.30864984, 0.21265557, -0.13968857, 0, -0.21960913, -0.33432296, -0.2544313, 0.25797185, -0.1694558, 1.08, 0.64, 0), Transform3D(0.869495, -0.4939419, 0, 0.4939419, 0.869495, 0, 0, 0, 1, -1.83, 0.75, 0), Transform3D(0.869495, -0.4939419, 0, 0.4939419, 0.869495, 0, 0, 0, 1, 0.46546686, 2.0540066, 0), Transform3D(0.817058, -0.49394187, 0.29738477, 0.46415356, 0.869495, 0.16893807, -0.34202012, -1.0192994e-08, 0.9396927, -2.6598225, 2.2107515, 0), Transform3D(0.66607183, -0.49394184, 0.5589006, 0.37838143, 0.869495, 0.31749973, -0.6427876, -2.4438355e-08, 0.7660445, -3.4896448, 3.671503, -1.5121076e-08)])
 new_position = Vector3(0, 1.68, 0)
@@ -360,7 +361,7 @@ transform = Transform3D(-1, 1.3076621e-07, -7.5497894e-08, 0, 0.49999997, 0.8660
 new_position = Vector3(0.4, 1.27, 0.34)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="button demo" unique_id=1375406689]
-transform = Transform3D(0.8695233, -0.50387526, -0.008002677, 0.50393707, 0.86936957, 0.016399544, -0.0012995413, -0.018201621, 1.0048343, -1.35425, 0.6021533, 0.010089874)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
 mesh = SubResource("BoxMesh_c02y3")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="button demo" unique_id=990304828]

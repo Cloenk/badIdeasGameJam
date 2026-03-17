@@ -24,11 +24,8 @@ var has_valid_nodepath: bool = false
 			nodepath = value.slice(0, value.get_name_count())
 
 @export var mode: ButtonMode = ButtonMode.TransformSerial
-
 @export var transform_relative_position: bool = false
-
 @export var transforms: Array[Transform3D]
-
 @export var show_all_transforms: bool
 
 @export_group("Add New Transform")
@@ -47,6 +44,7 @@ var is_running: bool = false
 var preview: bool = false
 var apply_if_valid: bool = false
 var reset_transform: bool = false
+var has_run: bool = false
 
 var serial_index: int = 0
 var serial_last_index: int = 0
@@ -101,7 +99,7 @@ func transform_button_function(which_button: ButtonEditorButtons):
 				reset_transform = false
 		increment = 1.0 / (blendtime * ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
 		inc_count = 1 + (blendtime * ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
-		if not was_running:
+		if not has_run:
 			original_transform = get_node(nodepath).global_transform
 		var serial_or_random: bool = false
 		match which_button:
@@ -155,12 +153,17 @@ func transform_button_function(which_button: ButtonEditorButtons):
 					next_transform = transforms[serial_index]
 			if was_running:
 				last_transform = current_transform
+			if not has_run:
+				last_transform = original_transform
+				if transform_relative_position:
+					last_transform.origin = get_node(nodepath).global_position - self.global_position
 			last_quat = Quaternion(last_transform.basis.orthonormalized())
 			next_quat = Quaternion(next_transform.basis.orthonormalized())
 			last_pos = last_transform.origin
 			next_pos = next_transform.origin
 			last_scale = last_transform.basis.get_scale()
 			next_scale = next_transform.basis.get_scale()
+		has_run = true
 @export var blendtime: float = 2
 @export var stepped: bool = false
 @export var steps: int = 5
@@ -274,3 +277,9 @@ func _physics_process(delta: float) -> void:
 				get_node(nodepath).global_transform = original_transform
 		accumulator += increment
 		run_count += 1
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		var referenced_node = get_node(nodepath)
+		if referenced_node != null:
+			referenced_node.global_transform = original_transform
