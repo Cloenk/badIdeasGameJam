@@ -116,7 +116,7 @@ func _input(event):
 				next_distance *= lerp(1.0, scale_out, zoom_speed_mult)
 			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				middle_mouse_down = event.pressed
-			elif event.button_index == MOUSE_BUTTON_LEFT and colliding:
+			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and colliding:
 				if colliding_with.collision_layer & 4:
 					#colliding_with.get_parent()
 					colliding_with.click()
