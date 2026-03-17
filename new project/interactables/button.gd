@@ -250,8 +250,12 @@ func transform_action(last_quat: Quaternion, next_quat: Quaternion, last_pos: Ve
 		DebugDraw3D.draw_line(self.global_position, use_transform.origin, debug_color)
 	return false
 
-func transform_action_finished():
-	pass
+func click():
+	match mode:
+		ButtonMode.TransformSerial, ButtonMode.TransformRandom, ButtonMode.TransformBlendpath:
+			transform_button_function(ButtonEditorButtons.TransformObject)
+		ButtonMode.VariableSerial, ButtonMode.VariableRandom, ButtonMode.VariableBlend:
+			pass
 
 func _physics_process(delta: float) -> void:
 	if is_running:

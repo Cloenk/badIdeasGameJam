@@ -33,6 +33,7 @@ var zoom_speed_mult: float = 1
 var capture: bool = true
 
 var colliding: bool = false
+var colliding_with: Node
 
 enum LookMode {MOUSE_MOVE, MOUSE_MOVE_NOCAP, MENU_BG, FREEZE, MOUSE_DRAG}
 var look_mode: LookMode = LookMode.MOUSE_MOVE
@@ -115,6 +116,10 @@ func _input(event):
 				next_distance *= lerp(1.0, scale_out, zoom_speed_mult)
 			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				middle_mouse_down = event.pressed
+			elif event.button_index == MOUSE_BUTTON_LEFT and colliding:
+				if colliding_with.collision_layer & 4:
+					#colliding_with.get_parent()
+					colliding_with.click()
 			if look_mode != LookMode.MOUSE_MOVE and look_mode != LookMode.MOUSE_DRAG:
 				set_mode_move()
 		elif event is InputEventMagnifyGesture:
@@ -169,6 +174,7 @@ func _process(delta):
 			nodePointer.visible = true
 			if(nodeRaycast.is_colliding()):
 				colliding = true
+				colliding_with = nodeRaycast.get_collider()
 				nodePointer.visible = true
 				aim_pos = nodeRaycast.get_collision_point()
 				nodePointer.global_transform.origin = aim_pos
@@ -180,10 +186,12 @@ func _process(delta):
 					nodePointer.global_transform.basis = Basis.looking_at(aim_norm)
 			else:
 				colliding = false
+				colliding_with = null
 				nodePointer.visible = false
 				aim_dist = 100000000
 		else:
 			nodePointer.visible = false
+			colliding_with = null
 
 func _exit_tree() -> void:
 	set_mode_menu()
