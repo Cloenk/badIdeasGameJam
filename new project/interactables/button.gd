@@ -78,7 +78,6 @@ enum ButtonEditorButtons {
 	TransformObject
 }
 func transform_button_function(which_button: ButtonEditorButtons):
-	print(which_button)
 	if has_valid_nodepath:
 		var was_running = is_running
 		accumulator = 0
@@ -131,6 +130,7 @@ func transform_button_function(which_button: ButtonEditorButtons):
 					serial_last_index = serial_index - 1
 					if serial_last_index < 0:
 						serial_last_index = len(transforms) - 1
+					print(serial_last_index, " -> ", serial_index)
 				elif mode == ButtonMode.TransformRandom or mode == ButtonMode.VariableRandom:
 					serial_or_random = true
 					var next_idx = -1
@@ -140,7 +140,7 @@ func transform_button_function(which_button: ButtonEditorButtons):
 							break
 					serial_last_index = serial_index
 					serial_index = next_idx
-				print(serial_last_index, " -> ", serial_index)
+					print(serial_last_index, " -> ", serial_index)
 		if serial_or_random:
 			var last_transform: Transform3D
 			var next_transform: Transform3D
@@ -153,7 +153,7 @@ func transform_button_function(which_button: ButtonEditorButtons):
 					next_transform = transforms[serial_index]
 			if was_running:
 				last_transform = current_transform
-			if not has_run:
+			if (not has_run) and mode != ButtonMode.TransformBlendpath and mode != ButtonMode.VariableBlend:
 				last_transform = original_transform
 				if transform_relative_position:
 					last_transform.origin = get_node(nodepath).global_position - self.global_position
@@ -163,6 +163,9 @@ func transform_button_function(which_button: ButtonEditorButtons):
 			next_pos = next_transform.origin
 			last_scale = last_transform.basis.get_scale()
 			next_scale = next_transform.basis.get_scale()
+		#if mode == ButtonMode.TransformBlendpath or ButtonMode.VariableBlend:
+			#blend_last_index = 0
+			#blend_index = 1
 		has_run = true
 @export var blendtime: float = 2
 @export var stepped: bool = false
@@ -260,14 +263,32 @@ func click():
 		ButtonMode.VariableSerial, ButtonMode.VariableRandom, ButtonMode.VariableBlend:
 			pass
 
+var blendpath_last_index: int
+var blendpath_index: int
+
 func _physics_process(delta: float) -> void:
 	if is_running:
-		#print(accumulator)
-		#ButtonMode.TransformBlendpath:
-			#last_transform = transforms[blend_last_index]
-			#next_transform = transforms[blend_index]
 		if (preview and Engine.is_editor_hint()) or not preview:
-			transform_action(last_quat, next_quat, last_pos, next_pos, accumulator, apply_if_valid)
+			if mode == ButtonMode.TransformBlendpath or mode == ButtonMode.VariableBlend:
+				var last_blendpath_last_index: int = blendpath_last_index
+				blendpath_last_index = floor(accumulator * len(transforms))
+				blendpath_index = blendpath_last_index + 1
+				var blendpath_individual: float = accumulator * len(transforms) - blendpath_last_index
+				if blendpath_last_index < len(transforms):
+					var last_transform: Transform3D = transforms[blendpath_last_index]
+					last_quat = Quaternion(last_transform.basis.orthonormalized())
+					last_pos = last_transform.origin
+					last_scale = last_transform.basis.get_scale()
+					if blendpath_index < len(transforms):
+						if blendpath_last_index != last_blendpath_last_index:
+							print(blendpath_last_index, " -> ", blendpath_last_index + 1)
+						var next_transform: Transform3D = transforms[blendpath_index]
+						next_quat = Quaternion(next_transform.basis.orthonormalized())
+						next_pos = next_transform.origin
+						next_scale = next_transform.basis.get_scale()
+						transform_action(last_quat, next_quat, last_pos, next_pos, blendpath_individual, apply_if_valid)
+			else:
+				transform_action(last_quat, next_quat, last_pos, next_pos, accumulator, apply_if_valid)
 		if run_count >= inc_count:
 			# done
 			print("finished")
