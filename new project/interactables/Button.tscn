@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://p8gb85u67b8f" path="res://interactables/button.gd" id="1_fokac"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ut530"]
-height = 0.05
-radius = 0.05
+height = 0.15
+radius = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ut530"]
 shading_mode = 2
@@ -16,9 +16,9 @@ roughness = 0.3
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ut530"]
 material = SubResource("StandardMaterial3D_ut530")
-top_radius = 0.05
-bottom_radius = 0.05
-height = 0.05
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.1
 radial_segments = 12
 rings = 1
 cap_top = false
@@ -26,9 +26,9 @@ cap_bottom = false
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fokac"]
 material = SubResource("StandardMaterial3D_ut530")
-top_radius = 0.043
-bottom_radius = 0.05
-height = 0.01
+top_radius = 0.08
+bottom_radius = 0.1
+height = 0.025
 radial_segments = 12
 rings = 1
 cap_bottom = false
@@ -63,9 +63,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 mesh = SubResource("CylinderMesh_ut530")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1873013169]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.029886719)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.062572345)
 mesh = SubResource("CylinderMesh_fokac")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1765593535]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 1, 0.0019505024, -0.009264689, 0.026)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0.0019505024, -0.009264689, 0.06889973)
 mesh = SubResource("TextMesh_ut530")
