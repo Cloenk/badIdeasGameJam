@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var levelname : String;
 
 func _ready() -> void:
-	LevelSwitcher.level_cmd("level", ["testing/test02", "0"])
+	if levelname == "": levelname = "test02"
+	LevelSwitcher.level_cmd("level", ["testing/" + levelname, "0"])
