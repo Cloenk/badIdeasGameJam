@@ -4,6 +4,11 @@ render_mode unshaded;
 uniform sampler2D paper_atlas : repeat_enable;//, filter_nearest;
 uniform int paper_color_select : hint_range(0, 4, 1) = 0;
 uniform sampler2D paper_mult_overlay : filter_linear;
+uniform float paper_mult_amount : hint_range(0, 0.5, 0) = 0;
+uniform vec2 paper_mult_shift = vec2(0, 0);
+uniform int paper_rotate : hint_range(0, 3, 1) = 0;
+uniform bvec2 paper_flip = bvec2(false, false);
+//uniform bvec4 paper_cut_half_lrtb = bvec4(false, false, false, false);
 
 //uniform bool left_holes
 
@@ -18,7 +23,7 @@ struct Page {
 	Line lines[8];
 	int line_repeat[8];
 	int lines_use;
-	vec2 page_size;
+	ivec2 page_size;
 };
 
 
@@ -57,8 +62,19 @@ int page_tile_index(Page page, ivec2 pos) {
 	if (line.repeat_all) {
 		pos_x = pos_x % line.tiles_use;
 	}
+	int line_total = 0;
 	for (int i = 0; i < line.tiles_use; i++) {
-		tile_accum += line.tile_repeat[i];
+		if (line.tile_repeat[i] > 0) {
+			line_total += line.tile_repeat[i];
+		}
+	}
+	int line_remainder = page.page_size.x - line_total;
+	for (int i = 0; i < line.tiles_use; i++) {
+		if (line.tile_repeat[i] <= 0) {
+			tile_accum += line_remainder;
+		} else {
+			tile_accum += line.tile_repeat[i];
+		}
 		if (pos_x < tile_accum) {
 			tile_index = i;
 			break;
@@ -70,12 +86,28 @@ int page_tile_index(Page page, ivec2 pos) {
 	return line.tiles[tile_index];
 }
 
-vec4 page_paper(vec2 uv, Page page) {
-	float page_scale = exp2(ceil(log2(max(page.page_size.x, page.page_size.y))));
-	vec2 page_offset = 0.5 * (vec2(page_scale) - page.page_size);
+vec4 page_paper(vec2 uv, Page page, bool flipx, bool flipy, int rotate) {
+	float page_scale = exp2(ceil(log2(float(max(page.page_size.x, page.page_size.y)))));
+	vec2 page_offset = 0.5 * (vec2(page_scale) - vec2(page.page_size));
+	vec2 uv_use = uv;
+	if (flipx) {
+		uv.x = 1.0 - uv.x;
+	}
+	if (flipy) {
+		uv.y = 1.0 - uv.y;
+	}
+	if (rotate >= 1) {
+		uv = vec2(uv.y, 1.0 - uv.x);
+	}
+	if (rotate >= 2) {
+		uv = vec2(uv.y, 1.0 - uv.x);
+	}
+	if (rotate >= 3) {
+		uv = vec2(uv.y, 1.0 - uv.x);
+	}
 	vec2 uv_page_scale = uv * page_scale - page_offset;
-	vec2 uv_page_scale_clamped = clamp(uv_page_scale, vec2(0.0), page.page_size);
-	float inside = (uv_page_scale.x >= 0.0 ? 1.0 : 0.0) * (uv_page_scale.x <= page.page_size.x ? 1.0 : 0.0) * (uv_page_scale.y >= 0.0 ? 1.0 : 0.0) * (uv_page_scale.y <= page.page_size.y ? 1.0 : 0.0);
+	vec2 uv_page_scale_clamped = clamp(uv_page_scale, vec2(0.0), vec2(page.page_size));
+	float inside = (uv_page_scale.x >= 0.0 ? 1.0 : 0.0) * (uv_page_scale.x <= vec2(page.page_size).x ? 1.0 : 0.0) * (uv_page_scale.y >= 0.0 ? 1.0 : 0.0) * (uv_page_scale.y <= vec2(page.page_size).y ? 1.0 : 0.0);
 	vec2 frac_uv = fract(uv_page_scale_clamped);
 	//return vec4(frac_uv, inside, 1.0);
 	ivec2 int_uv = ivec2(floor(uv_page_scale_clamped));
@@ -86,22 +118,49 @@ vec4 page_paper(vec2 uv, Page page) {
 	return tile;
 }
 
+vec2 rotate(vec2 vert, float angle) {
+	float s = sin(angle);
+	float c = cos(angle);
+
+	// [cos - sin, sin + cos]
+	return vec2(vert.x * c - vert.y * s, vert.x * s + vert.y * c );
+}
+
+vec3 inv_mult(vec3 input, float scale) {
+	return vec3(1.0) - (vec3(1.0) - input) * scale;
+}
+
 void fragment() {
 	Line lines[] = {
-		Line({0, 1, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false),
-		Line({16, 17, 18, 19, 20, 21, 22, 23}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false),
-		Line({24, 25, 26, 32, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1}, 4, false),
-		Line({16, 17, 18, 19, 20, 21, 22, 23}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false),
-		Line({16, 17, 18, 19, 20, 21, 22, 23}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false),
-		Line({16, 17, 18, 19, 20, 21, 22, 23}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false),
-		Line({16, 17, 18, 19, 20, 21, 22, 23}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false),
-		Line({16, 17, 18, 19, 20, 21, 22, 23}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, false)
+		Line({12, 13, 12, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({14, 15, 14, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({28, 29, 28, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({30, 31, 30, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({44, 45, 44, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({46, 47, 46, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({0, 16, 0, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({1, 3, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({2, 4, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({33, 34, 35, 3, 4, 5, 6, 9}, {1, 0, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({33, 0, 35, 3, 4, 5, 6, 9}, {1, 0, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 20, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({23, 40, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({28, 29, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 20, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 22, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false)
 	};
 	Page pages[] = {
-		Page({lines[0], lines[1], lines[2], lines[0], lines[1], lines[2], lines[0], lines[1]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, vec2(11, 15))
+		// demo pages to show all the lines
+		Page({lines[0], lines[1], lines[2], lines[3], lines[4], lines[5], lines[6], lines[7]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15)),
+		Page({lines[8], lines[9], lines[10], lines[11], lines[12], lines[13], lines[14], lines[15]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15))
+		//Page({lines[16], lines[9], lines[10], lines[11], lines[12], lines[13], lines[14], lines[15]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15))
+		// pages to use
 	};
-	vec4 page_rgba = page_paper(UV, pages[0]);
-	ALBEDO = page_rgba.rgb;
+	vec4 page_rgba = page_paper(UV, pages[1], paper_flip.x, paper_flip.y, paper_rotate);
+	vec3 page_mult1 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 1.47 + vec2(0.5, 0.3) + paper_mult_shift, 1.5)).rgb * 1.2, paper_mult_amount);
+	vec3 page_mult2 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 1.93 + vec2(0.5, 0.7) + paper_mult_shift.yx, 0.7)).rgb * 1.2, paper_mult_amount * 0.6);
+	vec3 page_mult3 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 2.51 + vec2(0.5) - paper_mult_shift, 1.222)).rgb * 1.2, paper_mult_amount * 0.2);
+	ALBEDO = page_rgba.rgb * page_mult1 * page_mult2 * page_mult3;
 	ALPHA = page_rgba.a;
 }
 

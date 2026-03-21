@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bva1lwk0j0cng" path="res://interactables/note_page.gdshader" id="1_viect"]
 [ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="2_48iw0"]
+[ext_resource type="Texture2D" uid="uid://douuucp0au3h8" path="res://interactables/note graphics/julia-maior-P6rShCD6Sx4-unsplash square_seamless-export 256x.png" id="3_rv2q2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qnmrq"]
 viewport_path = NodePath("SubViewport")
@@ -37,6 +38,11 @@ render_priority = 0
 shader = ExtResource("1_viect")
 shader_parameter/paper_atlas = ExtResource("2_48iw0")
 shader_parameter/paper_color_select = 0
+shader_parameter/paper_mult_overlay = ExtResource("3_rv2q2")
+shader_parameter/paper_mult_amount = 0.15555555
+shader_parameter/paper_mult_shift = Vector2(11.02, -4.59)
+shader_parameter/paper_rotate = 0
+shader_parameter/paper_flip = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_viect"]
 material = SubResource("ShaderMaterial_48iw0")
