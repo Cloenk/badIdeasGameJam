@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dgtqj3qv1kkb4"]
+
+[ext_resource type="Shader" uid="uid://bva1lwk0j0cng" path="res://interactables/note_page.gdshader" id="1_viect"]
+[ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="2_48iw0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qnmrq"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_48iw0"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_viect"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viect"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+specular_mode = 2
+albedo_color = Color(0.89275575, 0.89275575, 0.8927557, 1)
+albedo_texture = SubResource("ViewportTexture_qnmrq")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+emission_operator = 1
+emission_texture = SubResource("ViewportTexture_viect")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = SubResource("ViewportTexture_48iw0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qnmrq"]
+material = SubResource("StandardMaterial3D_viect")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48iw0"]
+render_priority = 0
+shader = ExtResource("1_viect")
+shader_parameter/paper_atlas = ExtResource("2_48iw0")
+shader_parameter/paper_color_select = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_viect"]
+material = SubResource("ShaderMaterial_48iw0")
+size = Vector2(0.5, 0.5)
+
+[node name="Note" type="Node3D" unique_id=101307340]
+
+[node name="plane" type="MeshInstance3D" parent="." unique_id=1653199266]
+mesh = SubResource("PlaneMesh_qnmrq")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=60062948]
+own_world_3d = true
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=2104950984]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
+projection = 1
+current = true
+size = 0.5
+
+[node name="page" type="MeshInstance3D" parent="SubViewport" unique_id=116685472]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.01, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_viect")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport" unique_id=1128097329]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+bbcode_enabled = true
+text = "[color=black][font=\"fonts/Telegraphem.otf\"][font_size=30]blah blah blah blah[/font_size][/font][/color]"
+scroll_active = false
+threaded = true
+selection_enabled = true
