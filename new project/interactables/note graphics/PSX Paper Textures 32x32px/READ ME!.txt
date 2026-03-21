@@ -1,0 +1,7 @@
+Thank you for downloading this collection of PSX paper textures. They were made for designing low poly, retro-style videogames (90s shooters, Nintendo 64, PlayStation 1, and so on). 
+
+What can they be used for? You might have a sheet, or sheets, of paper that can be inspected and read (mystery, horror), or for levels themed around arts & crafts, stationary (platformers, puzzle games), etc. You can use them for any purpose, really.
+
+Paper_atlas_256x256px is a texture atlas containing all the textures in a single image. This atlas can be used as a tileset the same way some PlayStation 1 games did.
+
+All textures were made by Emerald Eel. Licenced under CC0 / Public Domain. Credit is not necessary, but appreciated.
