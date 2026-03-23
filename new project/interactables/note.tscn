@@ -5,11 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="2_48iw0"]
 [ext_resource type="Texture2D" uid="uid://douuucp0au3h8" path="res://interactables/note graphics/julia-maior-P6rShCD6Sx4-unsplash square_seamless-export 256x.png" id="3_rv2q2"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qnmrq"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_6p7ht"]
+viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_48iw0"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_i2xxr"]
+viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_viect"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dp72d"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viect"]
 resource_local_to_scene = true
@@ -17,15 +20,15 @@ transparency = 1
 cull_mode = 2
 specular_mode = 2
 albedo_color = Color(0.89275575, 0.89275575, 0.8927557, 1)
-albedo_texture = SubResource("ViewportTexture_qnmrq")
+albedo_texture = SubResource("ViewportTexture_6p7ht")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
 emission_operator = 1
-emission_texture = SubResource("ViewportTexture_viect")
+emission_texture = SubResource("ViewportTexture_dp72d")
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
-backlight_texture = SubResource("ViewportTexture_48iw0")
+backlight_texture = SubResource("ViewportTexture_i2xxr")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qnmrq"]
 resource_local_to_scene = true
@@ -72,7 +75,7 @@ current = true
 size = 0.5
 
 [node name="page" type="MeshInstance3D" parent="SubViewport" unique_id=116685472]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.02, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.05, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_viect")
 
@@ -99,3 +102,5 @@ shape = SubResource("BoxShape3D_rv2q2")
 [node name="Camera3D" type="Camera3D" parent="rotate/tilt" unique_id=1507537745]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.716017, 0)
 current = true
+
+[connection signal="finished" from="SubViewport/RichTextLabel" to="." method="_on_rich_text_label_finished"]

@@ -1,6 +1,8 @@
 extends StaticBody3D
 
 @onready var camera_3d: Camera3D = $rotate/tilt/Camera3D
+@onready var plane: MeshInstance3D = $plane
+@onready var sub_viewport: SubViewport = $SubViewport
 
 var current_camera: Camera3D
 #var curr_cam_original_gxform: Transform3D
@@ -25,6 +27,10 @@ var input_shim_id: int
 
 func _ready() -> void:
 	input_shim_id = self.get_rid().get_id()
+	var plane_mat: StandardMaterial3D = plane.mesh.surface_get_material(0)
+	plane_mat.albedo_texture = sub_viewport.get_texture()
+	plane_mat.emission_texture = sub_viewport.get_texture()
+	plane_mat.backlight_texture = sub_viewport.get_texture()
 	#print(input_shim_id)
 
 func click():
@@ -111,3 +117,7 @@ func _process(delta: float) -> void:
 				var interpolated_quat = from_cam_quat.slerp(to_cam_quat, interpolate)
 				var new_xform = Transform3D(Basis(interpolated_quat), interpolated_gpos)
 				current_camera.global_transform = new_xform
+
+
+func _on_rich_text_label_finished() -> void:
+	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
