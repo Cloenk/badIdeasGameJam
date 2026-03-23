@@ -8,7 +8,6 @@ uniform float paper_mult_amount : hint_range(0, 0.5, 0) = 0;
 uniform vec2 paper_mult_shift = vec2(0, 0);
 uniform int paper_rotate : hint_range(0, 3, 1) = 0;
 uniform bvec2 paper_flip = bvec2(false, false);
-//uniform bvec4 paper_cut_half_lrtb = bvec4(false, false, false, false);
 
 //uniform bool left_holes
 
@@ -24,6 +23,7 @@ struct Page {
 	int line_repeat[8];
 	int lines_use;
 	ivec2 page_size;
+	//bvec paper_cut_half_lrtb = bvec4(false, false, false, false);
 };
 
 
@@ -132,31 +132,50 @@ vec3 inv_mult(vec3 input, float scale) {
 
 void fragment() {
 	Line lines[] = {
-		Line({12, 13, 12, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({14, 15, 14, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({28, 29, 28, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({30, 31, 30, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({44, 45, 44, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({46, 47, 46, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({0, 16, 0, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({1, 3, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({2, 4, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({33, 34, 35, 3, 4, 5, 6, 9}, {1, 0, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({33, 0, 35, 3, 4, 5, 6, 9}, {1, 0, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({17, 20, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({23, 40, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
-		Line({28, 29, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({12, 13, 12, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // black vert only hole
+		Line({12, 12, 12, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // black vert only
+		Line({14, 15, 14, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // pink vert only hole
+		Line({14, 14, 14, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // pink vert only
+		Line({28, 29, 28, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid black across black down hole
+		Line({28, 28, 28, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid black across black down
+		Line({30, 31, 30, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid black across pink down hole
+		Line({30, 30, 30, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid black across pink down
+		Line({44, 45, 44, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid pink across black down hole
+		Line({44, 44, 44, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid pink across black down
+		Line({46, 47, 46, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid pink across pink down hole
+		Line({46, 46, 46, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // big grid pink across pink down
+		Line({0, 16, 0, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // plain hole
+		Line({0, 0, 0, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // plain
+		Line({1, 3, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // black small grid hole
+		Line({1, 1, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // black small grid
+		Line({2, 4, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // blue small grid hole
+		Line({2, 2, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // blue small grid
+		Line({33, 34, 35, 3, 4, 5, 6, 9}, {1, 0, 1, 1, 1, 1, 1, 1}, 3, false), // green bars green
+		Line({33, 0, 35, 3, 4, 5, 6, 9}, {1, 0, 1, 1, 1, 1, 1, 1}, 3, false), // green bars plain
+		Line({17, 20, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // black small grid with no vertical on first two hole
+		Line({17, 19, 1, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // black small grid with no vertical on first two
+		Line({23, 40, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // blue small grid with no vertical on first two hole
+		Line({23, 39, 2, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false), // blue small grid with no vertical on first two
+		Line({28, 29, 1, 28, 4, 5, 6, 9}, {1, 1, -1, 1, 1, 1, 1, 1}, 4, false), // black small grid with big grid on first two hole
+		Line({28, 28, 1, 28, 4, 5, 6, 9}, {1, 1, -1, 1, 1, 1, 1, 1}, 4, false), // black small grid with big grid on first two
+		Line({8, 9, 2, 8, 4, 5, 6, 9}, {1, 1, -1, 1, 1, 1, 1, 1}, 4, false), // blue small grid with big grid on first two hole
+		Line({8, 8, 2, 8, 4, 5, 6, 9}, {1, 1, -1, 1, 1, 1, 1, 1}, 4, false), // blue small grid with big grid on first two
 		Line({17, 20, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 19, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 22, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 22, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
+		Line({17, 22, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false),
 		Line({17, 22, 17, 3, 4, 5, 6, 9}, {1, 1, 1, 1, 1, 1, 1, 1}, 3, false)
 	};
 	Page pages[] = {
 		// demo pages to show all the lines
 		Page({lines[0], lines[1], lines[2], lines[3], lines[4], lines[5], lines[6], lines[7]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15)),
-		Page({lines[8], lines[9], lines[10], lines[11], lines[12], lines[13], lines[14], lines[15]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15))
-		//Page({lines[16], lines[9], lines[10], lines[11], lines[12], lines[13], lines[14], lines[15]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15))
+		Page({lines[8], lines[9], lines[10], lines[11], lines[12], lines[13], lines[14], lines[15]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15)),
+		Page({lines[16], lines[17], lines[18], lines[19], lines[20], lines[21], lines[22], lines[23]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15)),
+		Page({lines[24], lines[25], lines[26], lines[27], lines[28], lines[29], lines[30], lines[31]}, {1, 1, 1, 1, 1, 1, 1, 1}, 8, ivec2(11, 15))
 		// pages to use
 	};
-	vec4 page_rgba = page_paper(UV, pages[1], paper_flip.x, paper_flip.y, paper_rotate);
+	vec4 page_rgba = page_paper(UV, pages[3], paper_flip.x, paper_flip.y, paper_rotate);
 	vec3 page_mult1 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 1.47 + vec2(0.5, 0.3) + paper_mult_shift, 1.5)).rgb * 1.2, paper_mult_amount);
 	vec3 page_mult2 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 1.93 + vec2(0.5, 0.7) + paper_mult_shift.yx, 0.7)).rgb * 1.2, paper_mult_amount * 0.6);
 	vec3 page_mult3 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 2.51 + vec2(0.5) - paper_mult_shift, 1.222)).rgb * 1.2, paper_mult_amount * 0.2);
