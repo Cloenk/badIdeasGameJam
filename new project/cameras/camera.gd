@@ -136,6 +136,8 @@ func _input(event):
 			if look_mode == LookMode.MENU_BG:
 				# when a proper menu is added this needs to be removed and explicitly handled by the menu
 				set_mode_move()
+			elif look_mode == LookMode.FREEZE:
+				set_mode_freeze_captured()
 		elif event is InputEventMagnifyGesture:
 			next_distance *= lerp(1.0, (1 / event.factor), zoom_speed_mult)
 		elif event is InputEventMouseMotion and use_mouse_movement: # and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
@@ -161,7 +163,10 @@ func _input(event):
 				nodeSpringarm.spring_length = 0
 				active_camera = camera_first_person
 		elif event.is_action_pressed("release_mouse"):# or (event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed):
-			set_mode_menu()
+			if look_mode != LookMode.FREEZE_CAP:
+				set_mode_menu()
+			else:
+				set_mode_freeze()
 		for cb in input_shims.values():
 			if cb.is_valid():
 				cb.call(event)
