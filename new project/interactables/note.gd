@@ -15,6 +15,7 @@ var from_cam_gpos: Vector3
 var from_cam_quat: Quaternion
 var bez_point_pos: Vector3
 var bez_point_gpos: Vector3
+var original_fov: float
 
 var interpolate: float = 0
 var is_moving_cam: bool = false
@@ -55,6 +56,7 @@ func click():
 			from_cam_quat = Quaternion(current_camera.global_transform.basis)
 			bez_point_pos = to_cam_pos.normalized() * from_cam_pos.length()
 			bez_point_gpos = bez_point_pos + self.global_position
+			original_fov = current_camera.fov
 			counter = 0
 			counter_scale = 1.0
 			can_cancel = false
@@ -78,6 +80,7 @@ func reset_curr_cam():
 		GlobalReferences.camera.input_shims.erase(input_shim_id)
 		GlobalReferences.camera.can_call_click = true
 		GlobalReferences.player.movement.can_move = true
+		current_camera.fov = original_fov
 
 func input_shim(event):
 	if event is InputEventMouseButton:
@@ -117,6 +120,7 @@ func _process(delta: float) -> void:
 				var interpolated_quat = from_cam_quat.slerp(to_cam_quat, interpolate)
 				var new_xform = Transform3D(Basis(interpolated_quat), interpolated_gpos)
 				current_camera.global_transform = new_xform
+				current_camera.fov = lerp(original_fov, camera_3d.fov, interpolate)
 
 
 func _on_rich_text_label_finished() -> void:

@@ -66,6 +66,8 @@ skeleton = NodePath("")
 [node name="SubViewport" type="SubViewport" parent="." unique_id=60062948]
 own_world_3d = true
 transparent_bg = true
+msaa_2d = 1
+msaa_3d = 1
 render_target_update_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=2104950984]
@@ -102,5 +104,6 @@ shape = SubResource("BoxShape3D_rv2q2")
 [node name="Camera3D" type="Camera3D" parent="rotate/tilt" unique_id=1507537745]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.716017, 0)
 current = true
+fov = 50.0
 
 [connection signal="finished" from="SubViewport/RichTextLabel" to="." method="_on_rich_text_label_finished"]
