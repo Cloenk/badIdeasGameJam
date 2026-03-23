@@ -28,6 +28,7 @@ backlight = Color(1, 1, 1, 1)
 backlight_texture = SubResource("ViewportTexture_48iw0")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qnmrq"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_viect")
 size = Vector2(0.5, 0.5)
 

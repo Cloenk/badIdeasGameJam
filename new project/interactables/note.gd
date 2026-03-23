@@ -25,16 +25,16 @@ var input_shim_id: int
 
 func _ready() -> void:
 	input_shim_id = self.get_rid().get_id()
-	print(input_shim_id)
+	#print(input_shim_id)
 
 func click():
 	#current_camera = get_viewport().get_camera_3d()
-	print("click")
+	#print("click")
 	if GlobalReferences.camera != null:
-		print("GlobalReferences.camera is not null")
+		#print("GlobalReferences.camera is not null")
 		current_camera = GlobalReferences.camera.active_camera
 		if current_camera != null:
-			print("GlobalReferences.camera.active_camera is not null")
+			#print("GlobalReferences.camera.active_camera is not null")
 			GlobalReferences.camera.set_mode_freeze_captured()
 			GlobalReferences.camera.input_shims[input_shim_id] = input_shim
 			GlobalReferences.camera.can_call_click = false
@@ -62,7 +62,7 @@ func f_can_cancel():
 
 func reset_curr_cam():
 	if current_camera != null:
-		print("reset")
+		#print("reset")
 		counter = 0
 		counter_scale = 1.0
 		is_moving_cam = false
@@ -76,7 +76,7 @@ func reset_curr_cam():
 func input_shim(event):
 	if event is InputEventMouseButton:
 		if event.pressed and counter > 0.25:
-			print("input shim")
+			#print("input shim")
 			#var temp_cam_pos  = to_cam_pos
 			#var temp_cam_gpos = to_cam_gpos
 			#var temp_cam_quat = to_cam_quat
@@ -96,7 +96,7 @@ func input_shim(event):
 func _process(delta: float) -> void:
 	if current_camera != null:
 		if is_moving_cam:
-			print(counter)
+			#print(counter)
 			var next_counter = counter + delta * counter_scale
 			if next_counter <= counter_max:# and next_counter >= 0:
 				counter = next_counter
