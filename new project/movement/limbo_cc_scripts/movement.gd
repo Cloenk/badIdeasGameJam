@@ -34,6 +34,8 @@ var desired_air_velocity: Vector3
 @export var run_velocity: float = 3.5 # a little under 8 mph
 @export var sprint_velocity: float = 7 # a little under 16 mph
 
+var can_move: bool = true
+
 ## Normal ready function.
 func _ready() -> void:
 	add_transition(walk_run, crouch, &"crouch")
@@ -161,7 +163,9 @@ var wish_dir
 ## Called each frame when this state is active.
 func _update(delta: float) -> void:
 	update_ground_state(delta)
-	var input_dir: Vector2 = Input.get_vector(&"left", &"right", &"up", &"down").normalized()
+	var input_dir: Vector2
+	if can_move:
+		input_dir = Input.get_vector(&"left", &"right", &"up", &"down").normalized()
 	wish_dir = camera.nodeRotate.basis * Vector3(input_dir.x, 0.0, input_dir.y)
 	if not is_on_ground:
 		#print("not on floor")

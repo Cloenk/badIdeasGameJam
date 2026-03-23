@@ -35,14 +35,16 @@ var capture: bool = true
 var colliding: bool = false
 var colliding_with: Node
 
-enum LookMode {MOUSE_MOVE, MOUSE_MOVE_NOCAP, MENU_BG, FREEZE, MOUSE_DRAG}
+enum LookMode {MOUSE_MOVE, MOUSE_MOVE_NOCAP, MENU_BG, FREEZE, MOUSE_DRAG, FREEZE_CAP}
 var look_mode: LookMode = LookMode.MOUSE_MOVE
 var middle_mouse_down: bool = false
 var use_mouse_movement: bool = true
 
 var process_aim: bool = true
+var can_call_click: bool = true
 
 var third_person_select: bool = false
+var active_camera: Node
 var is_active: bool = true:
 	set(value):
 		is_active = value
@@ -55,11 +57,14 @@ var is_active: bool = true:
 		else:
 			nodeRotate.process_mode = Node.PROCESS_MODE_DISABLED
 
+var input_shims: Dictionary[int, Callable]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	scale_out = 1 / scale_in
 	set_mode_menu()
+	GlobalReferences.camera = self
+	active_camera = camera_first_person
 
 func add_raycast_exception(col_obj: CollisionObject3D):
 	nodeRaycast.add_exception(col_obj)
@@ -92,6 +97,13 @@ func set_mode_freeze():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	look_mode = LookMode.FREEZE
 
+func set_mode_freeze_captured():
+	zoom_speed_mult = 0
+	look_speed_mult = 0
+	use_mouse_movement = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	look_mode = LookMode.FREEZE_CAP
+
 func set_mode_menu():
 	zoom_speed_mult = 0
 	look_speed_mult = 0.1
@@ -116,11 +128,13 @@ func _input(event):
 				next_distance *= lerp(1.0, scale_out, zoom_speed_mult)
 			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				middle_mouse_down = event.pressed
-			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and colliding:
+			elif event.button_index == MOUSE_BUTTON_LEFT and can_call_click and event.pressed and colliding:
 				if colliding_with.collision_layer & 4:
 					#colliding_with.get_parent()
 					colliding_with.click()
-			if look_mode != LookMode.MOUSE_MOVE and look_mode != LookMode.MOUSE_DRAG:
+			#if look_mode not in [LookMode.MOUSE_MOVE, LookMode.MOUSE_DRAG]:
+			if look_mode == LookMode.MENU_BG:
+				# when a proper menu is added this needs to be removed and explicitly handled by the menu
 				set_mode_move()
 		elif event is InputEventMagnifyGesture:
 			next_distance *= lerp(1.0, (1 / event.factor), zoom_speed_mult)
@@ -134,18 +148,23 @@ func _input(event):
 		#	if event.keycode == KEY_ESCAPE and event.pressed:
 		#		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		elif event.is_action_pressed("swap_cameras"):
-			if third_person_select:
-				third_person_select = false
+			if not third_person_select:
+				third_person_select = true
 				camera_first_person.current = false and is_active
 				camera_third_person.current = true and is_active
 				nodeSpringarm.spring_length = camera_distance
+				active_camera = camera_third_person
 			else:
-				third_person_select = true
-				camera_third_person.current = false and is_active
+				third_person_select = false
 				camera_first_person.current = true and is_active
+				camera_third_person.current = false and is_active
 				nodeSpringarm.spring_length = 0
+				active_camera = camera_first_person
 		elif event.is_action_pressed("release_mouse"):# or (event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed):
 			set_mode_menu()
+		for cb in input_shims.values():
+			if cb.is_valid():
+				cb.call(event)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

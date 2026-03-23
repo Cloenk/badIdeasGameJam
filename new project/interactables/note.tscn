@@ -1,17 +1,15 @@
 [gd_scene format=3 uid="uid://dgtqj3qv1kkb4"]
 
+[ext_resource type="Script" uid="uid://nnhq87xqvbvh" path="res://interactables/note.gd" id="1_6p7ht"]
 [ext_resource type="Shader" uid="uid://bva1lwk0j0cng" path="res://interactables/note_page.gdshader" id="1_viect"]
 [ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="2_48iw0"]
 [ext_resource type="Texture2D" uid="uid://douuucp0au3h8" path="res://interactables/note graphics/julia-maior-P6rShCD6Sx4-unsplash square_seamless-export 256x.png" id="3_rv2q2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qnmrq"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_48iw0"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_viect"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viect"]
 resource_local_to_scene = true
@@ -48,14 +46,23 @@ shader_parameter/paper_flip = 0
 material = SubResource("ShaderMaterial_48iw0")
 size = Vector2(0.5, 0.5)
 
-[node name="Note" type="Node3D" unique_id=101307340]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rv2q2"]
+size = Vector3(0.5, 0.05, 0.6)
+
+[node name="Note" type="StaticBody3D" unique_id=1900597010 groups=["clickable"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_6p7ht")
 
 [node name="plane" type="MeshInstance3D" parent="." unique_id=1653199266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 mesh = SubResource("PlaneMesh_qnmrq")
+skeleton = NodePath("")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=60062948]
 own_world_3d = true
 transparent_bg = true
+render_target_update_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=2104950984]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
@@ -64,7 +71,7 @@ current = true
 size = 0.5
 
 [node name="page" type="MeshInstance3D" parent="SubViewport" unique_id=116685472]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.01, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.02, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_viect")
 
@@ -80,3 +87,14 @@ text = "[color=black][font=\"fonts/Telegraphem.otf\"][font_size=30]blah blah bla
 scroll_active = false
 threaded = true
 selection_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=908339172]
+shape = SubResource("BoxShape3D_rv2q2")
+
+[node name="rotate" type="Node3D" parent="." unique_id=1674341606]
+
+[node name="tilt" type="Node3D" parent="rotate" unique_id=1388707887]
+
+[node name="Camera3D" type="Camera3D" parent="rotate/tilt" unique_id=1507537745]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.716017, 0)
+current = true

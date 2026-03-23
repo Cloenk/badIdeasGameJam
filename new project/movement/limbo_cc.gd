@@ -9,3 +9,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	faceforward.basis = camera.nodeRotate.basis
+
+func _ready() -> void:
+	GlobalReferences.player = self

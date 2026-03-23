@@ -26,6 +26,7 @@ GsomConsole="*res://addons/gsom_console/./gsom_console_autoload.gd"
 LevelSwitcher="*res://levels/level_switcher_autoload.gd"
 CsgToolkitAutoload="*uid://w8ad8q4lneis"
 DebugParabola3D="*res://debug utils/debug_parabola_3d.gd"
+GlobalReferences="*uid://dsimh1hyp0e2f"
 
 [debug_draw_3d]
 
@@ -44,6 +45,7 @@ enabled=PackedStringArray("res://addons/OSIK/plugin.cfg", "res://addons/PolyHave
 [global_group]
 
 Spawnpoint="exact foot position to spawn player at"
+clickable="contains a click() method"
 
 [input]
 
@@ -100,10 +102,12 @@ climb={
 
 [layer_names]
 
+3d_render/layer_2="unseen by 1st person camera"
 3d_physics/layer_1="static geometry"
 3d_physics/layer_2="player"
 3d_physics/layer_3="clickable"
 3d_physics/layer_4="climbable"
+3d_physics/layer_7="multiclick - clicks all buttons inside it"
 
 [physics]
 
