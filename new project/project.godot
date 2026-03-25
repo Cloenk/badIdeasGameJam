@@ -40,7 +40,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/OSIK/plugin.cfg", "res://addons/PolyHavenImport/plugin.cfg", "res://addons/csg_converter/plugin.cfg", "res://addons/csg_mesher/plugin.cfg", "res://addons/csg_toolkit/plugin.cfg", "res://addons/gsom_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/PolyHavenImport/plugin.cfg", "res://addons/csg_converter/plugin.cfg", "res://addons/csg_mesher/plugin.cfg", "res://addons/csg_toolkit/plugin.cfg", "res://addons/gsom_console/plugin.cfg")
 
 [global_group]
 
