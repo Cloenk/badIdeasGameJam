@@ -13,12 +13,17 @@ enum NotePageCollectionMode {Variations, HoleCount, LineColor}
 		list_mode = value
 		emit_changed()
 
+@export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_STORAGE & PROPERTY_USAGE_INTERNAL) var setlast: bool = true:
+	set(value):
+		for page in pages:
+			page.connect("changed", page_changed)
+
 func page_changed():
 	emit_changed()
 
-func _init() -> void:
-	for page in pages:
-		page.connect("changed", page_changed)
+#func _init() -> void:
+	#for page in pages:
+		#page.connect("changed", page_changed)
 
 
 static func oneoff(page: NotePage) -> NotePageCollection:

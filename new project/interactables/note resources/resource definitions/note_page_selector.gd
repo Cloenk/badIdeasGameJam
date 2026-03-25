@@ -19,11 +19,17 @@ class_name NotePageSelector
 		color = value
 		emit_changed()
 
+@export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_STORAGE & PROPERTY_USAGE_INTERNAL) var setlast: bool = true:
+	set(value):
+		collection.connect("changed", page_changed)
+
 func page_changed():
 	emit_changed()
 
-func _init() -> void:
-	collection.connect("changed", page_changed)
+#func _init() -> void:
+	#if collection == null:
+		#await collection
+	#collection.connect("changed", page_changed)
 
 func get_page() -> NotePage:
 	var selected: NotePage = collection.select_page(variation, hole_count, color)
