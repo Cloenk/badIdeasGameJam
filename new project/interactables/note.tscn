@@ -5,13 +5,37 @@
 [ext_resource type="Resource" uid="uid://dvs8bvrywffok" path="res://interactables/note resources/pages/ibm_green_bars.tres" id="2_dp72d"]
 [ext_resource type="Script" uid="uid://cdqiguagknrbp" path="res://interactables/note resources/resource definitions/note_page_selector.gd" id="3_i2xxr"]
 [ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="3_rv2q2"]
+[ext_resource type="FontFile" uid="uid://bklpbwu7dr5y7" path="res://fonts/typewriter_condensed/typewcond_regular.otf" id="4_jkxmm"]
+[ext_resource type="FontFile" uid="uid://bu3a7u1qiy0j0" path="res://fonts/typewriter_condensed/typewcond_bold.otf" id="5_hrlg1"]
 [ext_resource type="Texture2D" uid="uid://blux0yw4fsr4w" path="res://interactables/note graphics/jonathan-greenaway-V21SnYHwZ-M-unsplash copy 3_seamless small.png" id="6_dp72d"]
+[ext_resource type="FontFile" uid="uid://cgksrdfipvuj" path="res://fonts/typewriter_condensed/typewcond_demi.otf" id="6_hrlg1"]
+[ext_resource type="FontFile" uid="uid://cy6dwj80mvpi4" path="res://fonts/OCRA.otf" id="7_fmqa4"]
 
 [sub_resource type="Resource" id="Resource_i2xxr"]
 script = ExtResource("3_i2xxr")
 collection = ExtResource("2_dp72d")
 variation = 1
 metadata/_custom_type_script = "uid://cdqiguagknrbp"
+
+[sub_resource type="FontVariation" id="FontVariation_hrlg1"]
+base_font = ExtResource("4_jkxmm")
+spacing_bottom = -4
+
+[sub_resource type="FontVariation" id="FontVariation_fmqa4"]
+base_font = ExtResource("5_hrlg1")
+
+[sub_resource type="FontVariation" id="FontVariation_w1x2f"]
+base_font = ExtResource("5_hrlg1")
+variation_transform = Transform2D(1, 0.23, 0.05, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_0psyo"]
+base_font = ExtResource("6_hrlg1")
+variation_transform = Transform2D(1, 0.23, 0.05, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_60lvj"]
+base_font = ExtResource("7_fmqa4")
+variation_embolden = -0.15
+variation_transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dp72d"]
 viewport_path = NodePath("SubViewport")
@@ -66,9 +90,35 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_6p7ht")
 note_page = SubResource("Resource_i2xxr")
-text_margin = Vector4(4, 10, 4, 4)
-text = "[color=black][font=\"fonts/typewriter_condensed/typewcond_regular.otf\"][font_size=14]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, so we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this. End of log - Dr. Cecilia Katja Arnold 1980.[/font_size][/font][/color]"
-paragraph_separation = null
+text_margin = Vector4(4, 6, 4, 4)
+text = "[fill]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this.[/fill]
+[b][i]End of log - Dr. Cecilia Katja Arnold 1980.[/i][/b]
+
+[code][font_size=8]Test 1990-RE948: Power Reduction Stability Monitoring.
+1103: Logging started.
+1114: Backup safety measures put in place.
+1139: Power ramp down initiated.
+1220: First EMF microdeviation detected, slowing rate.
+1410: Microdeviation burst, terminal is backlogged.
+1413: Burst over.
+1546: Building power flickered, terminal offline, missed multiple field deviations.
+1609: 1/3 power reached. Seems stable under majority influence of field mirror plates. Delaying as long as possible.
+1710: Informed to drop power immediately to finish the test early.
+1715: Microdeviation cluster around start of power drop rate increase.
+1730: Power off, field deviation background rate elevated.
+1732: Field mirrors seem to be holding. Test Concluded.
+[/font_size][/code]"
+font_color = Color(0.09708548, 0.026111437, 0.23706427, 1)
+normal_font = SubResource("FontVariation_hrlg1")
+bold_font = SubResource("FontVariation_fmqa4")
+bold_italics_font = SubResource("FontVariation_w1x2f")
+italics_font = SubResource("FontVariation_0psyo")
+mono_font = SubResource("FontVariation_60lvj")
+normal_font_size = 14
+bold_font_size = 14
+bold_italics_font_size = 14
+italics_font_size = 14
+mono_font_size = 14
 
 [node name="plane" type="MeshInstance3D" parent="." unique_id=1653199266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -101,17 +151,45 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/MarginContainer" unique_id=1128097329]
 layout_mode = 2
 focus_mode = 2
+theme_override_colors/default_color = Color(0.09708548, 0.026111437, 0.23706427, 1)
+theme_override_constants/line_separation = 0
+theme_override_constants/paragraph_separation = 0
+theme_override_fonts/normal_font = SubResource("FontVariation_hrlg1")
+theme_override_fonts/bold_font = SubResource("FontVariation_fmqa4")
+theme_override_fonts/bold_italics_font = SubResource("FontVariation_w1x2f")
+theme_override_fonts/italics_font = SubResource("FontVariation_0psyo")
+theme_override_fonts/mono_font = SubResource("FontVariation_60lvj")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
 bbcode_enabled = true
-text = "[color=black][font=\"fonts/typewriter_condensed/typewcond_regular.otf\"][font_size=14]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, so we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this. End of log - Dr. Cecilia Katja Arnold 1980.[/font_size][/font][/color]"
+text = "[fill]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this.[/fill]
+[b][i]End of log - Dr. Cecilia Katja Arnold 1980.[/i][/b]
+
+[code][font_size=8]Test 1990-RE948: Power Reduction Stability Monitoring.
+1103: Logging started.
+1114: Backup safety measures put in place.
+1139: Power ramp down initiated.
+1220: First EMF microdeviation detected, slowing rate.
+1410: Microdeviation burst, terminal is backlogged.
+1413: Burst over.
+1546: Building power flickered, terminal offline, missed multiple field deviations.
+1609: 1/3 power reached. Seems stable under majority influence of field mirror plates. Delaying as long as possible.
+1710: Informed to drop power immediately to finish the test early.
+1715: Microdeviation cluster around start of power drop rate increase.
+1730: Power off, field deviation background rate elevated.
+1732: Field mirrors seem to be holding. Test Concluded.
+[/font_size][/code]"
 scroll_active = false
-horizontal_alignment = 3
 threaded = true
 selection_enabled = true
 
@@ -126,5 +204,9 @@ shape = SubResource("BoxShape3D_rv2q2")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.716017, 0)
 current = true
 fov = 50.0
+
+[node name="TextEditDelay" type="Timer" parent="." unique_id=2094768336]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="finished" from="SubViewport/MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_finished"]

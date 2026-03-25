@@ -7,6 +7,8 @@ extends StaticBody3D
 @onready var page: MeshInstance3D = $SubViewport/page
 @onready var rich_text_label: RichTextLabel = $SubViewport/MarginContainer/RichTextLabel
 
+@export_group("Page")
+
 @export var note_page: NotePage:
 	set(value):
 		note_page = value
@@ -44,6 +46,10 @@ func update_page_material(value):
 			await ready
 		page.get_active_material(0).set_shader_parameter("paper_flip_y", value)
 
+@export_group("Text")
+
+@onready var text_edit_delay: Timer = $TextEditDelay
+
 @export var text_margin: Vector4:
 	set(value):
 		text_margin = value
@@ -52,13 +58,18 @@ func update_page_material(value):
 			await ready
 		if not $SubViewport/MarginContainer/RichTextLabel.is_finished():
 			await $SubViewport/MarginContainer/RichTextLabel.finished
+		if text_edit_delay != null and not text_edit_delay.is_stopped():
+			await text_edit_delay.timeout
 		if margin != null:
 			margin.add_theme_constant_override(&"margin_left"  , 10 * value.x)
 			margin.add_theme_constant_override(&"margin_top"   , 10 * value.y)
 			margin.add_theme_constant_override(&"margin_right" , 10 * value.z)
 			margin.add_theme_constant_override(&"margin_bottom", 10 * value.w)
+			if text_edit_delay != null:
+				text_edit_delay.start(0.25)
 
-@export_multiline() var text: String = "[color=black][font=\"fonts/Telegraphem.otf\"][font_size=30]blah blah blah blah[/font_size][/font][/color]":
+## https://docs.godotengine.org/en/stable/tutorials/ui/bbcode_in_richtextlabel.html
+@export_multiline() var text: String = "blah [b][i]blah[/i][/b] [code]blah[/code] [color=red]blah[/color]":
 	set(value):
 		text = value
 		if not is_node_ready() or not rich_text_label.is_finished(): await ready
@@ -85,12 +96,75 @@ func update_page_material(value):
 		if not rich_text_label.is_finished(): await rich_text_label.finished
 		if rich_text_label != null: rich_text_label.add_theme_constant_override(&"paragraph_separation", value)
 
-@export var normal_font: FontFile:
+@export var normal_font: Font:
 	set(value):
 		normal_font = value
 		if rich_text_label == null or not is_node_ready(): await ready
 		if not rich_text_label.is_finished(): await rich_text_label.finished
 		if rich_text_label != null: rich_text_label.add_theme_font_override(&"normal_font", value)
+
+@export var bold_font: Font:
+	set(value):
+		bold_font = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_override(&"bold_font", value)
+
+@export var bold_italics_font: Font:
+	set(value):
+		bold_italics_font = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_override(&"bold_italics_font", value)
+
+@export var italics_font: Font:
+	set(value):
+		italics_font = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_override(&"italics_font", value)
+
+@export var mono_font: Font:
+	set(value):
+		mono_font = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_override(&"mono_font", value)
+
+@export var normal_font_size: int:
+	set(value):
+		normal_font_size = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_size_override(&"normal_font_size", value)
+
+@export var bold_font_size: int:
+	set(value):
+		bold_font_size = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_size_override(&"bold_font_size", value)
+
+@export var bold_italics_font_size: int:
+	set(value):
+		bold_italics_font_size = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_size_override(&"bold_italics_font_size", value)
+
+@export var italics_font_size: int:
+	set(value):
+		italics_font_size = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_size_override(&"italics_font_size", value)
+
+@export var mono_font_size: int:
+	set(value):
+		mono_font_size = value
+		if rich_text_label == null or not is_node_ready(): await ready
+		if not rich_text_label.is_finished(): await rich_text_label.finished
+		if rich_text_label != null: rich_text_label.add_theme_font_size_override(&"mono_font_size", value)
 
 var current_camera: Camera3D
 #var curr_cam_original_gxform: Transform3D
