@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://nnhq87xqvbvh" path="res://interactables/note.gd" id="1_6p7ht"]
 [ext_resource type="Shader" uid="uid://bva1lwk0j0cng" path="res://interactables/note_page.gdshader" id="1_viect"]
-[ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="2_48iw0"]
-[ext_resource type="Texture2D" uid="uid://douuucp0au3h8" path="res://interactables/note graphics/julia-maior-P6rShCD6Sx4-unsplash square_seamless-export 256x.png" id="3_rv2q2"]
+[ext_resource type="Resource" uid="uid://dvs8bvrywffok" path="res://interactables/note resources/pages/ibm_green_bars.tres" id="2_dp72d"]
+[ext_resource type="Script" uid="uid://cdqiguagknrbp" path="res://interactables/note resources/resource definitions/note_page_selector.gd" id="3_i2xxr"]
+[ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="3_rv2q2"]
+[ext_resource type="Texture2D" uid="uid://blux0yw4fsr4w" path="res://interactables/note graphics/jonathan-greenaway-V21SnYHwZ-M-unsplash copy 3_seamless small.png" id="6_dp72d"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_6p7ht"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_i2xxr"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="Resource" id="Resource_i2xxr"]
+script = ExtResource("3_i2xxr")
+collection = ExtResource("2_dp72d")
+variation = 1
+metadata/_custom_type_script = "uid://cdqiguagknrbp"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dp72d"]
 viewport_path = NodePath("SubViewport")
@@ -20,7 +22,7 @@ transparency = 1
 cull_mode = 2
 specular_mode = 2
 albedo_color = Color(0.89275575, 0.89275575, 0.8927557, 1)
-albedo_texture = SubResource("ViewportTexture_6p7ht")
+albedo_texture = SubResource("ViewportTexture_dp72d")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
@@ -28,7 +30,7 @@ emission_operator = 1
 emission_texture = SubResource("ViewportTexture_dp72d")
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
-backlight_texture = SubResource("ViewportTexture_i2xxr")
+backlight_texture = SubResource("ViewportTexture_dp72d")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qnmrq"]
 resource_local_to_scene = true
@@ -38,13 +40,19 @@ size = Vector2(0.5, 0.5)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_48iw0"]
 render_priority = 0
 shader = ExtResource("1_viect")
-shader_parameter/paper_atlas = ExtResource("2_48iw0")
+shader_parameter/paper_atlas = ExtResource("3_rv2q2")
 shader_parameter/paper_color_select = 0
-shader_parameter/paper_mult_overlay = ExtResource("3_rv2q2")
-shader_parameter/paper_mult_amount = 0.15555555
-shader_parameter/paper_mult_shift = Vector2(11.02, -4.59)
+shader_parameter/paper_mult_overlay = ExtResource("6_dp72d")
+shader_parameter/paper_mult_amount = 1.05
+shader_parameter/paper_mult_shift = Vector2(-2.2662218, 2.7368343)
 shader_parameter/paper_rotate = 0
-shader_parameter/paper_flip = 0
+shader_parameter/paper_flip_x = false
+shader_parameter/paper_flip_y = false
+shader_parameter/page_lines = [27, 26, 0, 0, 0, 0, 0, 0]
+shader_parameter/page_lines_repeat = [1, 1, 0, 0, 0, 0, 0, 0]
+shader_parameter/page_lines_use = 2
+shader_parameter/page_size = Vector2i(16, 13)
+shader_parameter/page_loop = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_viect"]
 material = SubResource("ShaderMaterial_48iw0")
@@ -57,6 +65,10 @@ size = Vector3(0.5, 0.05, 0.6)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_6p7ht")
+note_page = SubResource("Resource_i2xxr")
+text_margin = Vector4(4, 10, 4, 4)
+text = "[color=black][font=\"fonts/typewriter_condensed/typewcond_regular.otf\"][font_size=14]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, so we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this. End of log - Dr. Cecilia Katja Arnold 1980.[/font_size][/font][/color]"
+paragraph_separation = null
 
 [node name="plane" type="MeshInstance3D" parent="." unique_id=1653199266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -68,7 +80,6 @@ own_world_3d = true
 transparent_bg = true
 msaa_2d = 1
 msaa_3d = 1
-render_target_update_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=2104950984]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
@@ -81,16 +92,26 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.05, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_viect")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport" unique_id=1128097329]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport" unique_id=705714204]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/MarginContainer" unique_id=1128097329]
+layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
-text = "[color=black][font=\"fonts/Telegraphem.otf\"][font_size=30]blah blah blah blah[/font_size][/font][/color]"
+text = "[color=black][font=\"fonts/typewriter_condensed/typewcond_regular.otf\"][font_size=14]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, so we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this. End of log - Dr. Cecilia Katja Arnold 1980.[/font_size][/font][/color]"
 scroll_active = false
+horizontal_alignment = 3
 threaded = true
 selection_enabled = true
 
@@ -106,4 +127,4 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 current = true
 fov = 50.0
 
-[connection signal="finished" from="SubViewport/RichTextLabel" to="." method="_on_rich_text_label_finished"]
+[connection signal="finished" from="SubViewport/MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_finished"]

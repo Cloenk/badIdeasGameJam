@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="NotePageCollection" format=3 uid="uid://brun1u4ir8r8m"]
+
+[ext_resource type="Script" uid="uid://b87buitf8ul12" path="res://interactables/note resources/resource definitions/note_page.gd" id="1_jeepp"]
+[ext_resource type="Script" uid="uid://cwdr8t15clx7l" path="res://interactables/note resources/resource definitions/note_page_collection.gd" id="2_s5el0"]
+
+[sub_resource type="Resource" id="Resource_jeepp"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(59, 1), Vector2i(59, 1)])
+
+[sub_resource type="Resource" id="Resource_s5el0"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(59, 1), Vector2i(59, 2), Vector2i(58, 1), Vector2i(59, 7), Vector2i(58, 1), Vector2i(59, 1)])
+
+[sub_resource type="Resource" id="Resource_u2inf"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(59, 1), Vector2i(59, 1), Vector2i(58, 1), Vector2i(59, 4), Vector2i(58, 1), Vector2i(59, 4), Vector2i(58, 1), Vector2i(59, 1)])
+
+[sub_resource type="Resource" id="Resource_wltjq"]
+script = ExtResource("2_s5el0")
+pages = Array[ExtResource("1_jeepp")]([SubResource("Resource_jeepp"), SubResource("Resource_s5el0"), SubResource("Resource_u2inf")])
+list_mode = 1
+
+[sub_resource type="Resource" id="Resource_k4ce5"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(61, 1), Vector2i(61, 1)])
+
+[sub_resource type="Resource" id="Resource_twa4c"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(61, 1), Vector2i(61, 2), Vector2i(60, 1), Vector2i(61, 7), Vector2i(60, 1), Vector2i(61, 1)])
+
+[sub_resource type="Resource" id="Resource_h5hb6"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(61, 1), Vector2i(61, 1), Vector2i(60, 1), Vector2i(61, 4), Vector2i(60, 1), Vector2i(61, 4), Vector2i(60, 1), Vector2i(61, 1)])
+
+[sub_resource type="Resource" id="Resource_4oo6e"]
+script = ExtResource("2_s5el0")
+pages = Array[ExtResource("1_jeepp")]([SubResource("Resource_k4ce5"), SubResource("Resource_twa4c"), SubResource("Resource_h5hb6")])
+list_mode = 1
+
+[sub_resource type="Resource" id="Resource_3f4x6"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(63, 1), Vector2i(63, 1)])
+
+[sub_resource type="Resource" id="Resource_8ju2f"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(63, 1), Vector2i(63, 2), Vector2i(62, 1), Vector2i(63, 7), Vector2i(62, 1), Vector2i(63, 1)])
+
+[sub_resource type="Resource" id="Resource_tl4i1"]
+script = ExtResource("1_jeepp")
+lines = Array[Vector2i]([Vector2i(63, 1), Vector2i(63, 1), Vector2i(62, 1), Vector2i(63, 4), Vector2i(62, 1), Vector2i(63, 4), Vector2i(62, 1), Vector2i(63, 1)])
+
+[sub_resource type="Resource" id="Resource_pb462"]
+script = ExtResource("2_s5el0")
+pages = Array[ExtResource("1_jeepp")]([SubResource("Resource_3f4x6"), SubResource("Resource_8ju2f"), SubResource("Resource_tl4i1")])
+list_mode = 1
+
+[resource]
+script = ExtResource("2_s5el0")
+pages = Array[ExtResource("1_jeepp")]([SubResource("Resource_wltjq"), SubResource("Resource_4oo6e"), SubResource("Resource_pb462")])
+list_mode = 2
