@@ -7,9 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="3_rv2q2"]
 [ext_resource type="FontFile" uid="uid://bklpbwu7dr5y7" path="res://fonts/typewriter_condensed/typewcond_regular.otf" id="4_jkxmm"]
 [ext_resource type="FontFile" uid="uid://bu3a7u1qiy0j0" path="res://fonts/typewriter_condensed/typewcond_bold.otf" id="5_hrlg1"]
-[ext_resource type="Texture2D" uid="uid://blux0yw4fsr4w" path="res://interactables/note graphics/jonathan-greenaway-V21SnYHwZ-M-unsplash copy 3_seamless small.png" id="6_dp72d"]
+[ext_resource type="Texture2D" uid="uid://douuucp0au3h8" path="res://interactables/note graphics/julia-maior-P6rShCD6Sx4-unsplash square_seamless-export 256x.png" id="6_dp72d"]
 [ext_resource type="FontFile" uid="uid://cgksrdfipvuj" path="res://fonts/typewriter_condensed/typewcond_demi.otf" id="6_hrlg1"]
 [ext_resource type="FontFile" uid="uid://cy6dwj80mvpi4" path="res://fonts/OCRA.otf" id="7_fmqa4"]
+[ext_resource type="Texture2D" uid="uid://blux0yw4fsr4w" path="res://interactables/note graphics/jonathan-greenaway-V21SnYHwZ-M-unsplash copy 3_seamless small.png" id="11_w1x2f"]
 
 [sub_resource type="Resource" id="Resource_i2xxr"]
 script = ExtResource("3_i2xxr")
@@ -66,8 +67,12 @@ render_priority = 0
 shader = ExtResource("1_viect")
 shader_parameter/paper_atlas = ExtResource("3_rv2q2")
 shader_parameter/paper_color_select = 0
-shader_parameter/paper_mult_overlay = ExtResource("6_dp72d")
-shader_parameter/paper_mult_amount = 1.05
+shader_parameter/paper_mult1_tex = ExtResource("6_dp72d")
+shader_parameter/paper_mult1_amount = 0.4
+shader_parameter/paper_mult1_prescale = 1.3
+shader_parameter/paper_mult2_tex = ExtResource("11_w1x2f")
+shader_parameter/paper_mult2_amount = 1.5
+shader_parameter/paper_mult2_prescale = 1.0
 shader_parameter/paper_mult_shift = Vector2(-2.2662218, 2.7368343)
 shader_parameter/paper_rotate = 0
 shader_parameter/paper_flip_x = false

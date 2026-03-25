@@ -3,8 +3,12 @@ render_mode unshaded;
 
 uniform sampler2D paper_atlas : repeat_enable;//, filter_nearest;
 uniform int paper_color_select : hint_range(0, 4, 1) = 0;
-uniform sampler2D paper_mult_overlay : filter_linear;
-uniform float paper_mult_amount = 0;
+uniform sampler2D paper_mult1_tex : filter_linear;
+uniform float paper_mult1_amount = 0.5;
+uniform float paper_mult1_prescale = 1.0;
+uniform sampler2D paper_mult2_tex : filter_linear;
+uniform float paper_mult2_amount = 0.5;
+uniform float paper_mult2_prescale = 1.0;
 uniform vec2 paper_mult_shift = vec2(0, 0);
 
 uniform int paper_rotate : hint_range(0, 3, 1) = 0;
@@ -276,10 +280,13 @@ void fragment() {
 	Page input = Page(line_array, page_lines_repeat, page_lines_use, page_size, page_loop);
 	//vec4 page_rgba = page_paper(UV, basic_page(lines[1], lines[0], lines[1], 2), paper_flip.x, paper_flip.y, paper_rotate);
 	vec4 page_rgba = page_paper(UV, input, paper_flip_x, paper_flip_y, paper_rotate);
-	vec3 page_mult1 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 1.47 + vec2(0.5, 0.3) + paper_mult_shift, 1.5)).rgb, paper_mult_amount);
-	vec3 page_mult2 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 1.93 + vec2(0.5, 0.7) + paper_mult_shift.yx, 0.7)).rgb, paper_mult_amount * 0.6);
-	vec3 page_mult3 = inv_mult(texture(paper_mult_overlay, rotate(UV * 0.7 * 2.51 + vec2(0.5) - paper_mult_shift, 1.222)).rgb, paper_mult_amount * 0.2);
-	ALBEDO = page_rgba.rgb * page_mult1 * page_mult2 * page_mult3;
+	vec3 page_mult1_1 = inv_mult(texture(paper_mult1_tex, rotate(UV * 0.7 * 1.47 + vec2(0.5, 0.3) + paper_mult_shift, 1.5)).rgb * paper_mult1_prescale, paper_mult1_amount);
+	vec3 page_mult1_2 = inv_mult(texture(paper_mult1_tex, rotate(UV * 0.7 * 1.93 + vec2(0.5, 0.7) + paper_mult_shift.yx, 0.7)).rgb * paper_mult1_prescale, paper_mult1_amount * 0.6);
+	vec3 page_mult1_3 = inv_mult(texture(paper_mult1_tex, rotate(UV * 0.7 * 2.51 + vec2(0.5) - paper_mult_shift, 1.222)).rgb * paper_mult1_prescale, paper_mult1_amount * 0.2);
+	vec3 page_mult2_1 = inv_mult(texture(paper_mult2_tex, rotate(UV * 0.7 * 1.47 + vec2(0.5, 0.3) - paper_mult_shift, -1.25)).rgb * paper_mult2_prescale, paper_mult2_amount);
+	vec3 page_mult2_2 = inv_mult(texture(paper_mult2_tex, rotate(UV * 0.7 * 1.93 + vec2(0.5, 0.7) - paper_mult_shift.yx, -1.7)).rgb * paper_mult2_prescale, paper_mult2_amount * 0.6);
+	vec3 page_mult2_3 = inv_mult(texture(paper_mult2_tex, rotate(UV * 0.7 * 2.51 + vec2(0.5) + paper_mult_shift, -0.3333)).rgb * paper_mult2_prescale, paper_mult2_amount * 0.2);
+	ALBEDO = page_rgba.rgb * page_mult1_1 * page_mult1_2 * page_mult1_3 * page_mult2_1 * page_mult2_2 * page_mult2_3;
 	ALPHA = page_rgba.a;
 }
 
