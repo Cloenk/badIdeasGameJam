@@ -1,0 +1,217 @@
+[gd_scene format=3 uid="uid://dgtqj3qv1kkb4"]
+
+[ext_resource type="Script" uid="uid://nnhq87xqvbvh" path="res://interactables/note.gd" id="1_6p7ht"]
+[ext_resource type="Shader" uid="uid://bva1lwk0j0cng" path="res://interactables/note_page.gdshader" id="1_viect"]
+[ext_resource type="Resource" uid="uid://dvs8bvrywffok" path="res://interactables/note resources/pages/ibm_green_bars.tres" id="2_dp72d"]
+[ext_resource type="Script" uid="uid://cdqiguagknrbp" path="res://interactables/note resources/resource definitions/note_page_selector.gd" id="3_i2xxr"]
+[ext_resource type="Texture2D" uid="uid://ciqsw5h737ixx" path="res://interactables/note graphics/PSX Paper Textures 32x32px/Paper_atlas_256x256px_expanded.png" id="3_rv2q2"]
+[ext_resource type="FontFile" uid="uid://bklpbwu7dr5y7" path="res://fonts/typewriter_condensed/typewcond_regular.otf" id="4_jkxmm"]
+[ext_resource type="FontFile" uid="uid://bu3a7u1qiy0j0" path="res://fonts/typewriter_condensed/typewcond_bold.otf" id="5_hrlg1"]
+[ext_resource type="Texture2D" uid="uid://douuucp0au3h8" path="res://interactables/note graphics/julia-maior-P6rShCD6Sx4-unsplash square_seamless-export 256x.png" id="6_dp72d"]
+[ext_resource type="FontFile" uid="uid://cgksrdfipvuj" path="res://fonts/typewriter_condensed/typewcond_demi.otf" id="6_hrlg1"]
+[ext_resource type="FontFile" uid="uid://cy6dwj80mvpi4" path="res://fonts/OCRA.otf" id="7_fmqa4"]
+[ext_resource type="Texture2D" uid="uid://blux0yw4fsr4w" path="res://interactables/note graphics/jonathan-greenaway-V21SnYHwZ-M-unsplash copy 3_seamless small.png" id="11_w1x2f"]
+
+[sub_resource type="Resource" id="Resource_i2xxr"]
+script = ExtResource("3_i2xxr")
+collection = ExtResource("2_dp72d")
+variation = 1
+metadata/_custom_type_script = "uid://cdqiguagknrbp"
+
+[sub_resource type="FontVariation" id="FontVariation_hrlg1"]
+base_font = ExtResource("4_jkxmm")
+spacing_bottom = -4
+
+[sub_resource type="FontVariation" id="FontVariation_fmqa4"]
+base_font = ExtResource("5_hrlg1")
+
+[sub_resource type="FontVariation" id="FontVariation_w1x2f"]
+base_font = ExtResource("5_hrlg1")
+variation_transform = Transform2D(1, 0.23, 0.05, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_0psyo"]
+base_font = ExtResource("6_hrlg1")
+variation_transform = Transform2D(1, 0.23, 0.05, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_60lvj"]
+base_font = ExtResource("7_fmqa4")
+variation_embolden = -0.15
+variation_transform = Transform2D(0.8, 0, 0, 0.8, 0, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dp72d"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viect"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+specular_mode = 2
+albedo_color = Color(0.89275575, 0.89275575, 0.8927557, 1)
+albedo_texture = SubResource("ViewportTexture_dp72d")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+emission_operator = 1
+emission_texture = SubResource("ViewportTexture_dp72d")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = SubResource("ViewportTexture_dp72d")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qnmrq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_viect")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48iw0"]
+render_priority = 0
+shader = ExtResource("1_viect")
+shader_parameter/paper_atlas = ExtResource("3_rv2q2")
+shader_parameter/paper_color_select = 0
+shader_parameter/paper_mult1_tex = ExtResource("6_dp72d")
+shader_parameter/paper_mult1_amount = 0.4
+shader_parameter/paper_mult1_prescale = 1.3
+shader_parameter/paper_mult2_tex = ExtResource("11_w1x2f")
+shader_parameter/paper_mult2_amount = 1.5
+shader_parameter/paper_mult2_prescale = 1.0
+shader_parameter/paper_mult_shift = Vector2(-2.2662218, 2.7368343)
+shader_parameter/paper_rotate = 0
+shader_parameter/paper_flip_x = false
+shader_parameter/paper_flip_y = false
+shader_parameter/page_lines = [27, 26, 0, 0, 0, 0, 0, 0]
+shader_parameter/page_lines_repeat = [1, 1, 0, 0, 0, 0, 0, 0]
+shader_parameter/page_lines_use = 2
+shader_parameter/page_size = Vector2i(16, 13)
+shader_parameter/page_loop = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_viect"]
+material = SubResource("ShaderMaterial_48iw0")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rv2q2"]
+size = Vector3(0.5, 0.05, 0.6)
+
+[node name="Note" type="StaticBody3D" unique_id=1900597010 groups=["clickable"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_6p7ht")
+note_page = SubResource("Resource_i2xxr")
+text_margin = Vector4(4, 6, 4, 4)
+text = "[fill]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this.[/fill]
+[b][i]End of log - Dr. Cecilia Katja Arnold 1980.[/i][/b]
+
+[code][font_size=8]Test 1990-RE948: Power Reduction Stability Monitoring.
+1103: Logging started.
+1114: Backup safety measures put in place.
+1139: Power ramp down initiated.
+1220: First EMF microdeviation detected, slowing rate.
+1410: Microdeviation burst, terminal is backlogged.
+1413: Burst over.
+1546: Building power flickered, terminal offline, missed multiple field deviations.
+1609: 1/3 power reached. Seems stable under majority influence of field mirror plates. Delaying as long as possible.
+1710: Informed to drop power immediately to finish the test early.
+1715: Microdeviation cluster around start of power drop rate increase.
+1730: Power off, field deviation background rate elevated.
+1732: Field mirrors seem to be holding. Test Concluded.
+[/font_size][/code]"
+font_color = Color(0.09708548, 0.026111437, 0.23706427, 1)
+normal_font = SubResource("FontVariation_hrlg1")
+bold_font = SubResource("FontVariation_fmqa4")
+bold_italics_font = SubResource("FontVariation_w1x2f")
+italics_font = SubResource("FontVariation_0psyo")
+mono_font = SubResource("FontVariation_60lvj")
+normal_font_size = 14
+bold_font_size = 14
+bold_italics_font_size = 14
+italics_font_size = 14
+mono_font_size = 14
+
+[node name="plane" type="MeshInstance3D" parent="." unique_id=1653199266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("PlaneMesh_qnmrq")
+skeleton = NodePath("")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=60062948]
+own_world_3d = true
+transparent_bg = true
+msaa_2d = 1
+msaa_3d = 1
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=2104950984]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
+projection = 1
+current = true
+size = 0.5
+
+[node name="page" type="MeshInstance3D" parent="SubViewport" unique_id=116685472]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.05, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_viect")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport" unique_id=705714204]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/MarginContainer" unique_id=1128097329]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/default_color = Color(0.09708548, 0.026111437, 0.23706427, 1)
+theme_override_constants/line_separation = 0
+theme_override_constants/paragraph_separation = 0
+theme_override_fonts/normal_font = SubResource("FontVariation_hrlg1")
+theme_override_fonts/bold_font = SubResource("FontVariation_fmqa4")
+theme_override_fonts/bold_italics_font = SubResource("FontVariation_w1x2f")
+theme_override_fonts/italics_font = SubResource("FontVariation_0psyo")
+theme_override_fonts/mono_font = SubResource("FontVariation_60lvj")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
+bbcode_enabled = true
+text = "[fill]It all went wrong! We have noticed that our hazmat suits are deteriorating faster than usual. We only have one that is in good condition, we took a needless risk. I went with one of the interns and the suits failed. I was able to get out but the intern came out too late. It looked like radiation poisoning, but something wasn’t adding up. When we checked his DNA, he had a virus. It was nothing we’ve ever seen before. I’m starting to get worried that we just opened Pandora's box. We must look more into this.[/fill]
+[b][i]End of log - Dr. Cecilia Katja Arnold 1980.[/i][/b]
+
+[code][font_size=8]Test 1990-RE948: Power Reduction Stability Monitoring.
+1103: Logging started.
+1114: Backup safety measures put in place.
+1139: Power ramp down initiated.
+1220: First EMF microdeviation detected, slowing rate.
+1410: Microdeviation burst, terminal is backlogged.
+1413: Burst over.
+1546: Building power flickered, terminal offline, missed multiple field deviations.
+1609: 1/3 power reached. Seems stable under majority influence of field mirror plates. Delaying as long as possible.
+1710: Informed to drop power immediately to finish the test early.
+1715: Microdeviation cluster around start of power drop rate increase.
+1730: Power off, field deviation background rate elevated.
+1732: Field mirrors seem to be holding. Test Concluded.
+[/font_size][/code]"
+scroll_active = false
+threaded = true
+selection_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=908339172]
+shape = SubResource("BoxShape3D_rv2q2")
+
+[node name="rotate" type="Node3D" parent="." unique_id=1674341606]
+
+[node name="tilt" type="Node3D" parent="rotate" unique_id=1388707887]
+
+[node name="Camera3D" type="Camera3D" parent="rotate/tilt" unique_id=1507537745]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.716017, 0)
+current = true
+fov = 50.0
+
+[node name="TextEditDelay" type="Timer" parent="." unique_id=2094768336]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="finished" from="SubViewport/MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_finished"]

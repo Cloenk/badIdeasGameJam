@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="NotePageCollection" format=3 uid="uid://dvqu3g1j40dic"]
+
+[ext_resource type="Script" uid="uid://b87buitf8ul12" path="res://interactables/note resources/resource definitions/note_page.gd" id="1_c0m1i"]
+[ext_resource type="Script" uid="uid://cwdr8t15clx7l" path="res://interactables/note resources/resource definitions/note_page_collection.gd" id="2_yr0lb"]
+
+[sub_resource type="Resource" id="Resource_c0m1i"]
+script = ExtResource("1_c0m1i")
+lines = Array[Vector2i]([Vector2i(19, 1), Vector2i(19, 1)])
+
+[sub_resource type="Resource" id="Resource_yr0lb"]
+script = ExtResource("1_c0m1i")
+lines = Array[Vector2i]([Vector2i(19, 1), Vector2i(19, 2), Vector2i(18, 1), Vector2i(19, 7), Vector2i(18, 1), Vector2i(19, 1)])
+
+[sub_resource type="Resource" id="Resource_ecmet"]
+script = ExtResource("1_c0m1i")
+lines = Array[Vector2i]([Vector2i(19, 1), Vector2i(19, 1), Vector2i(18, 1), Vector2i(19, 4), Vector2i(18, 1), Vector2i(19, 4), Vector2i(18, 1), Vector2i(19, 1)])
+
+[resource]
+script = ExtResource("2_yr0lb")
+pages = Array[ExtResource("1_c0m1i")]([SubResource("Resource_c0m1i"), SubResource("Resource_yr0lb"), SubResource("Resource_ecmet")])
+list_mode = 1

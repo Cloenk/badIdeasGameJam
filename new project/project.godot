@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="bad ideas game jam puzzle box thing"
+config/name="bad ideas game jam containment cube"
 run/main_scene="uid://qmj27lex0mjc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
@@ -26,6 +26,7 @@ GsomConsole="*res://addons/gsom_console/./gsom_console_autoload.gd"
 LevelSwitcher="*res://levels/level_switcher_autoload.gd"
 CsgToolkitAutoload="*uid://w8ad8q4lneis"
 DebugParabola3D="*res://debug utils/debug_parabola_3d.gd"
+GlobalReferences="*uid://dsimh1hyp0e2f"
 
 [debug_draw_3d]
 
@@ -33,17 +34,18 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/OSIK/plugin.cfg", "res://addons/PolyHavenImport/plugin.cfg", "res://addons/csg_converter/plugin.cfg", "res://addons/csg_mesher/plugin.cfg", "res://addons/csg_toolkit/plugin.cfg", "res://addons/gsom_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/PolyHavenImport/plugin.cfg", "res://addons/csg_converter/plugin.cfg", "res://addons/csg_mesher/plugin.cfg", "res://addons/csg_toolkit/plugin.cfg", "res://addons/gsom_console/plugin.cfg")
 
 [global_group]
 
 Spawnpoint="exact foot position to spawn player at"
+clickable="contains a click() method"
 
 [input]
 
@@ -100,10 +102,12 @@ climb={
 
 [layer_names]
 
+3d_render/layer_2="unseen by 1st person camera"
 3d_physics/layer_1="static geometry"
 3d_physics/layer_2="player"
 3d_physics/layer_3="clickable"
 3d_physics/layer_4="climbable"
+3d_physics/layer_7="multiclick - clicks all buttons inside it"
 
 [physics]
 

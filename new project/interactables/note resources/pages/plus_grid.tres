@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="NotePageCollection" format=3 uid="uid://fagn8uakdt3m"]
+
+[ext_resource type="Script" uid="uid://b87buitf8ul12" path="res://interactables/note resources/resource definitions/note_page.gd" id="1_c8ii7"]
+[ext_resource type="Script" uid="uid://cwdr8t15clx7l" path="res://interactables/note resources/resource definitions/note_page_collection.gd" id="2_dpvg3"]
+
+[sub_resource type="Resource" id="Resource_c8ii7"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(53, 1), Vector2i(53, 1)])
+
+[sub_resource type="Resource" id="Resource_dpvg3"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(53, 1), Vector2i(53, 2), Vector2i(52, 1), Vector2i(53, 7), Vector2i(52, 1), Vector2i(53, 1)])
+
+[sub_resource type="Resource" id="Resource_mpd1q"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(53, 1), Vector2i(53, 1), Vector2i(52, 1), Vector2i(53, 4), Vector2i(52, 1), Vector2i(53, 4), Vector2i(52, 1), Vector2i(53, 1)])
+
+[sub_resource type="Resource" id="Resource_uwuk1"]
+script = ExtResource("2_dpvg3")
+pages = Array[ExtResource("1_c8ii7")]([SubResource("Resource_c8ii7"), SubResource("Resource_dpvg3"), SubResource("Resource_mpd1q")])
+list_mode = 1
+
+[sub_resource type="Resource" id="Resource_8pvvm"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(55, 1), Vector2i(55, 1)])
+
+[sub_resource type="Resource" id="Resource_ro561"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(55, 1), Vector2i(55, 2), Vector2i(54, 1), Vector2i(55, 7), Vector2i(54, 1), Vector2i(55, 1)])
+
+[sub_resource type="Resource" id="Resource_405pc"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(55, 1), Vector2i(55, 1), Vector2i(54, 1), Vector2i(55, 4), Vector2i(54, 1), Vector2i(55, 4), Vector2i(54, 1), Vector2i(55, 1)])
+
+[sub_resource type="Resource" id="Resource_gj5rj"]
+script = ExtResource("2_dpvg3")
+pages = Array[ExtResource("1_c8ii7")]([SubResource("Resource_8pvvm"), SubResource("Resource_ro561"), SubResource("Resource_405pc")])
+list_mode = 1
+
+[sub_resource type="Resource" id="Resource_f4i56"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(57, 1), Vector2i(57, 1)])
+
+[sub_resource type="Resource" id="Resource_ek4ep"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(57, 1), Vector2i(57, 2), Vector2i(56, 1), Vector2i(57, 7), Vector2i(56, 1), Vector2i(57, 1)])
+
+[sub_resource type="Resource" id="Resource_mo6tq"]
+script = ExtResource("1_c8ii7")
+lines = Array[Vector2i]([Vector2i(57, 1), Vector2i(57, 1), Vector2i(56, 1), Vector2i(57, 4), Vector2i(56, 1), Vector2i(57, 4), Vector2i(56, 1), Vector2i(57, 1)])
+
+[sub_resource type="Resource" id="Resource_vgp0e"]
+script = ExtResource("2_dpvg3")
+pages = Array[ExtResource("1_c8ii7")]([SubResource("Resource_f4i56"), SubResource("Resource_ek4ep"), SubResource("Resource_mo6tq")])
+list_mode = 1
+
+[resource]
+script = ExtResource("2_dpvg3")
+pages = Array[ExtResource("1_c8ii7")]([SubResource("Resource_uwuk1"), SubResource("Resource_gj5rj"), SubResource("Resource_vgp0e")])
+list_mode = 2

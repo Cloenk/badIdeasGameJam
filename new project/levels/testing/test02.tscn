@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b4hlld3ktldfk" path="res://test assets/house 1.glb" id="6_e0ndo"]
 [ext_resource type="Material" uid="uid://b282f6tleqruc" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k.tres" id="7_i1f57"]
 [ext_resource type="PackedScene" uid="uid://bl2emus6ngcot" path="res://interactables/Button.tscn" id="7_tik32"]
+[ext_resource type="PackedScene" uid="uid://dgtqj3qv1kkb4" path="res://interactables/note.tscn" id="8_tik32"]
 
 [sub_resource type="Environment" id="Environment_0iojf"]
 background_mode = 2
@@ -373,3 +374,6 @@ mesh = SubResource("CapsuleMesh_c02y3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
 visible = false
 mesh = SubResource("CapsuleMesh_ljpex")
+
+[node name="Note" parent="." unique_id=1900597010 instance=ExtResource("8_tik32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.720355, -1.0967255e-05, 5.3933496)

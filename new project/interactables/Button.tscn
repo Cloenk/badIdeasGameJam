@@ -46,7 +46,7 @@ line_spacing = -2.8
 curve_step = 10.0
 depth = 0.02
 
-[node name="Button" type="StaticBody3D" unique_id=649458515]
+[node name="Button" type="StaticBody3D" unique_id=649458515 groups=["clickable"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_fokac")

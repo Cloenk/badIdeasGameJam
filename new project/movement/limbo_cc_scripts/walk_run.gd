@@ -22,10 +22,11 @@ func _update(delta: float) -> void:
 	else:
 		get_root().desired_velocity = get_root().wish_dir * get_root().normal_walk_velocity
 	#agent.apply_central_force(wish_dir * 1000)
-	if Input.is_action_just_pressed(&"jump"):
-		#agent.linear_velocity *= 5
-		agent.apply_central_impulse(100 * get_root().wish_dir * get_root().ground_friction + 100 * get_root().ground_normal + 200 * Vector3.UP)
-		get_root().desired_velocity += get_root().wish_dir + get_root().ground_normal
-	#agent.move_and_slide()
-	if Input.is_action_just_pressed("climb"):
-		dispatch(&"walking_ledgeclimb")
+	if get_root().can_move:
+		if Input.is_action_just_pressed(&"jump"):
+			#agent.linear_velocity *= 5
+			agent.apply_central_impulse(100 * get_root().wish_dir * get_root().ground_friction + 100 * get_root().ground_normal + 200 * Vector3.UP)
+			get_root().desired_velocity += get_root().wish_dir + get_root().ground_normal
+		#agent.move_and_slide()
+		if Input.is_action_just_pressed("climb"):
+			dispatch(&"walking_ledgeclimb")
