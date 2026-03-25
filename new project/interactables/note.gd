@@ -45,6 +45,12 @@ func update_page_material(value):
 		if not is_node_ready():
 			await ready
 		page.get_active_material(0).set_shader_parameter("paper_flip_y", value)
+@export_range(0, 4, 1) var color: int:
+	set(value):
+		color = value
+		if not is_node_ready():
+			await ready
+		page.get_active_material(0).set_shader_parameter("paper_color_select", value)
 
 @export_group("Text")
 
