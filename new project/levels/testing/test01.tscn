@@ -1,7 +1,10 @@
-[gd_scene load_steps=34 format=4 uid="uid://denk6fn1vwa5b"]
+[gd_scene format=4 uid="uid://denk6fn1vwa5b"]
 
 [ext_resource type="Material" uid="uid://bmjgmchfvwf3k" path="res://materials/flat concrete/concrete_01_yosoyfreeman_2k.tres" id="1_bsrcr"]
 [ext_resource type="Material" uid="uid://bocc2w6kt2aty" path="res://materials/old wood/old_wood_olyryk_modified_4k.tres" id="1_hx4c0"]
+[ext_resource type="PackedScene" uid="uid://e02dvpgw8qb8" path="res://sound/music_starter.tscn" id="3_mm7rj"]
+[ext_resource type="AudioStream" uid="uid://b7a2rp6nrlmjv" path="res://sound/music/26 3 6.mp3" id="4_edee0"]
+[ext_resource type="AudioStream" uid="uid://dih7hcebj578u" path="res://sound/music/24 1 4 v4.mp3" id="5_donq1"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_hx4c0"]
 rayleigh_coefficient = 5.0
@@ -213,139 +216,142 @@ size = Vector3(1, 0.2, 12)
 material = ExtResource("1_hx4c0")
 size = Vector3(1, 0.2, 12)
 
-[node name="Test01" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_mm7rj"]
+size = Vector3(5, 6, 5)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Test01" type="Node3D" unique_id=75303319]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=96628657]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 0, 0)
 light_energy = 0.01
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=41891693]
 environment = SubResource("Environment_mm7rj")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=335154719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.5, 0)
 navigation_mesh = SubResource("NavigationMesh_bsrcr")
 
-[node name="Geometry (see other projects for csg version)" type="Node3D" parent="NavigationRegion3D"]
+[node name="Geometry (see other projects for csg version)" type="Node3D" parent="NavigationRegion3D" unique_id=2089782402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 
-[node name="combined" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="combined" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=1789182236]
 physics_material_override = SubResource("PhysicsMaterial_vdixq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/combined"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/combined" unique_id=1778742451]
 material_override = ExtResource("1_bsrcr")
 mesh = SubResource("ArrayMesh_mm7rj")
 skeleton = NodePath("")
 
-[node name="@CollisionShape3D@31396" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/combined"]
+[node name="@CollisionShape3D@31396" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/combined" unique_id=1294954259]
 shape = SubResource("ConcavePolygonShape3D_edee0")
 
-[node name="tunnel ladder ladder" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="tunnel ladder ladder" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=1191430287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, -9, -15.5)
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder" unique_id=1474300966]
 shape = SubResource("ConcavePolygonShape3D_bsrcr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder" unique_id=460661411]
 material_override = SubResource("StandardMaterial3D_mm7rj")
 mesh = SubResource("ArrayMesh_edee0")
 
-[node name="tunnel ladder ladder2" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="tunnel ladder ladder2" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=1821396992]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, -9, 15.5)
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder2" unique_id=1771131814]
 shape = SubResource("ConcavePolygonShape3D_donq1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/tunnel ladder ladder2" unique_id=302872702]
 material_override = SubResource("StandardMaterial3D_mm7rj")
 mesh = SubResource("ArrayMesh_nwf23")
 
-[node name="broken floor2" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="broken floor2" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=242999483]
 transform = Transform3D(-0.975464, 0.12523, -0.181073, -0.196904, -0.128344, 0.971986, 0.0984819, 0.983791, 0.149853, -20.8209, -4.00939, -18)
 physics_material_override = SubResource("PhysicsMaterial_vdixq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor2" unique_id=376907708]
 shape = SubResource("ConcavePolygonShape3D_di4v5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor2" unique_id=1584326006]
 mesh = SubResource("ArrayMesh_0u1nb")
 
-[node name="broken floor3" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="broken floor3" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=570583159]
 transform = Transform3D(-0.944716, -0.298742, -0.135147, -0.228047, 0.302484, 0.925472, -0.235598, 0.905128, -0.353889, -20.9939, -8.05409, -19.3953)
 physics_material_override = SubResource("PhysicsMaterial_vdixq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor3" unique_id=1603272670]
 shape = SubResource("ConcavePolygonShape3D_et0f0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor3" unique_id=1580678781]
 mesh = SubResource("ArrayMesh_s73y2")
 
-[node name="broken floor4" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="broken floor4" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=1682509227]
 transform = Transform3D(-0.176496, 0.972216, -0.153772, 0.312048, 0.203432, 0.928031, 0.933528, 0.115809, -0.339283, -18.5621, -2.23668, -5.79524)
 physics_material_override = SubResource("PhysicsMaterial_vdixq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor4" unique_id=928567662]
 shape = SubResource("ConcavePolygonShape3D_cf4hi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor4" unique_id=550810883]
 mesh = SubResource("ArrayMesh_ep2ky")
 
-[node name="broken floor5" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="broken floor5" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=948767917]
 transform = Transform3D(-0.222997, 0.0637601, -0.972732, -0.973542, -0.0656329, 0.218881, -0.0498873, 0.995805, 0.076709, -14.6634, -12.0228, -18)
 physics_material_override = SubResource("PhysicsMaterial_vdixq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor5" unique_id=674570412]
 shape = SubResource("ConcavePolygonShape3D_u0i7i")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor5" unique_id=806638811]
 mesh = SubResource("ArrayMesh_kyycb")
 
-[node name="broken floor6" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="broken floor6" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=2087314328]
 transform = Transform3D(0.299062, 0.266902, -0.916147, -0.655246, 0.755391, 0.00617395, 0.693697, 0.598455, 0.400795, -11.2496, -15.4611, -9.7603)
 physics_material_override = SubResource("PhysicsMaterial_vdixq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor6"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor6" unique_id=5845683]
 shape = SubResource("ConcavePolygonShape3D_22ryh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor6"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/broken floor6" unique_id=620870616]
 mesh = SubResource("ArrayMesh_y33td")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)" unique_id=466748722]
 transform = Transform3D(0.45506313, 0.5008722, -0.7362369, 4.5797077e-09, 0.82680583, 0.56248754, 0.8904592, -0.25596732, 0.37624884, 19.28925, -3.1093884, 17.430265)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/StaticBody3D" unique_id=735709070]
 shape = SubResource("BoxShape3D_vdixq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Geometry (see other projects for csg version)/StaticBody3D" unique_id=274171011]
 mesh = SubResource("BoxMesh_hx4c0")
 
-[node name="NavigationLink3D" type="NavigationLink3D" parent="NavigationRegion3D"]
+[node name="NavigationLink3D" type="NavigationLink3D" parent="NavigationRegion3D" unique_id=1150163921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7918, 0, -5.47522)
 start_position = Vector3(0.0348072, 0.588169, 0.242613)
 end_position = Vector3(0.867297, 3.27188, -1.34856)
 
-[node name="NavigationLink3D2" type="NavigationLink3D" parent="NavigationRegion3D"]
+[node name="NavigationLink3D2" type="NavigationLink3D" parent="NavigationRegion3D" unique_id=1407489947]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2149, 6.99656, -11.617)
 start_position = Vector3(-0.31963, 0.419396, -0.935063)
 end_position = Vector3(-5.14094, 0.187794, -2.69024)
 
-[node name="NavigationLink3D3" type="NavigationLink3D" parent="NavigationRegion3D"]
+[node name="NavigationLink3D3" type="NavigationLink3D" parent="NavigationRegion3D" unique_id=673163383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4143, 4.9019, -9.91006)
 start_position = Vector3(0.202206, 0.851227, -0.685223)
 end_position = Vector3(2.27602, 2.40232, -0.174352)
 
-[node name="NavigationLink3D4" type="NavigationLink3D" parent="NavigationRegion3D"]
+[node name="NavigationLink3D4" type="NavigationLink3D" parent="NavigationRegion3D" unique_id=1546535396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.271, -0.0220623, -15.9596)
 start_position = Vector3(0.0348072, 0.588169, 0.242613)
 end_position = Vector3(-0.642942, 2.70423, 2.18836)
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="Lights" type="Node3D" parent="." unique_id=2092057038]
 
-[node name="SpotLightSky" type="SpotLight3D" parent="Lights"]
+[node name="SpotLightSky" type="SpotLight3D" parent="Lights" unique_id=1910770018]
 transform = Transform3D(-0.8378, 0.186857, -0.513006, -0.250461, 0.703376, 0.66523, 0.485139, 0.685818, -0.542488, -6.80571, 7.69495, -19.3122)
 light_color = Color(0.592712, 0.70986, 0.776444, 1)
 light_energy = 10.0
@@ -353,7 +359,7 @@ spot_range = 31.0
 spot_angle = 50.0
 spot_angle_attenuation = 3.0
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=1535724343]
 transform = Transform3D(-4.37114e-08, -0.939693, 0.34202, 0, 0.34202, 0.939693, -1, 4.10753e-08, -1.49502e-08, 20, 5, -10)
 light_color = Color(0.906732, 0.617725, 0.338383, 1)
 light_energy = 15.0
@@ -361,7 +367,7 @@ spot_range = 12.0
 spot_angle = 80.0
 spot_angle_attenuation = 3.0
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights" unique_id=1806628440]
 transform = Transform3D(-4.37114e-08, 0.939693, -0.34202, -8.88178e-16, 0.34202, 0.939693, 1, 4.10753e-08, -1.49502e-08, 20, 1, 0)
 light_color = Color(0.906732, 0.617725, 0.338383, 1)
 light_energy = 15.0
@@ -369,7 +375,7 @@ spot_range = 12.0
 spot_angle = 80.0
 spot_angle_attenuation = 3.0
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights" unique_id=1186362813]
 transform = Transform3D(-4.37114e-08, -0.939693, 0.34202, 0, 0.34202, 0.939693, -1, 4.10753e-08, -1.49502e-08, 20, 5, 10)
 light_color = Color(0.906732, 0.617725, 0.338383, 1)
 light_energy = 15.0
@@ -377,7 +383,7 @@ spot_range = 12.0
 spot_angle = 80.0
 spot_angle_attenuation = 3.0
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=1720642361]
 transform = Transform3D(1.31134e-07, 0.939693, -0.34202, 8.88178e-16, 0.34202, 0.939693, 1, -1.23226e-07, 4.48505e-08, -16, 5, -10)
 light_color = Color(0.906732, 0.617725, 0.338383, 1)
 light_energy = 15.0
@@ -385,7 +391,7 @@ spot_range = 12.0
 spot_angle = 80.0
 spot_angle_attenuation = 3.0
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights" unique_id=294225625]
 transform = Transform3D(1.31134e-07, 0.939693, -0.34202, -9.76996e-15, 0.34202, 0.939693, 1, -1.23225e-07, 4.48503e-08, -10, 5, 14)
 light_color = Color(0.906732, 0.617725, 0.338383, 1)
 light_energy = 15.0
@@ -393,5 +399,21 @@ spot_range = 12.0
 spot_angle = 80.0
 spot_angle_attenuation = 3.0
 
-[node name="spawnpoint" type="Marker3D" parent="." groups=["Spawnpoint"]]
+[node name="spawnpoint" type="Marker3D" parent="." unique_id=1302584326 groups=["Spawnpoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.5, 0)
+
+[node name="MusicStarter" parent="." unique_id=1577662135 instance=ExtResource("3_mm7rj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, -17)
+audio = ExtResource("4_edee0")
+track_id = "26 3 6"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicStarter" unique_id=1820867792]
+shape = SubResource("BoxShape3D_mm7rj")
+
+[node name="MusicStarter2" parent="." unique_id=1508714739 instance=ExtResource("3_mm7rj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -5, -17)
+audio = ExtResource("5_donq1")
+track_id = "24 1 4"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicStarter2" unique_id=790917544]
+shape = SubResource("BoxShape3D_mm7rj")

@@ -46,6 +46,7 @@ enabled=PackedStringArray("res://addons/PolyHavenImport/plugin.cfg", "res://addo
 
 Spawnpoint="exact foot position to spawn player at"
 clickable="contains a click() method"
+musicplayer="used for fading out prior music before starting new music"
 
 [input]
 

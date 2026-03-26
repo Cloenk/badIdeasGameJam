@@ -3,7 +3,7 @@ extends Node
 
 var keys: Dictionary[String, IntState]
 
-func add_key(name: String, value: IntState):
+func set_key(name: String, value: IntState):
 	if keys.has(name):
 		keys[name] = value.replace(keys[name].value)
 	else:
@@ -11,6 +11,12 @@ func add_key(name: String, value: IntState):
 
 func has_key(name: String) -> bool:
 	return keys.has(name)
+
+func key_above_zero(name: String) -> bool:
+	if keys.has(name):
+		return keys[name].value > 0
+	else:
+		return false
 
 func get_key_value_or_0(name: String) -> int:
 	if keys.has(name):
