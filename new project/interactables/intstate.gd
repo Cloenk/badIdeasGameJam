@@ -1,5 +1,5 @@
 extends Resource
-class_name Key
+class_name IntState
 
 
 @export var value: int
@@ -7,7 +7,7 @@ enum ReplaceMode {Replace, Max, Min, Add, Subtract, SubtractRev, Multiply, Multi
 @export var replace_mode: ReplaceMode = ReplaceMode.Replace
 @export var blend_fac: float
 
-func replace(old: int) -> Key:
+func replace(old: int) -> IntState:
 	var newval = 0
 	match replace_mode:
 		ReplaceMode.Replace:
@@ -36,7 +36,7 @@ func replace(old: int) -> Key:
 				newval = 0
 		ReplaceMode.Blend:
 			newval = lerp(old, value, blend_fac)
-	var res = Key.new()
+	var res = IntState.new()
 	res.value = newval
 	res.replace_mode = self.replace_mode
 	res.blend_fac = self.blend_fac

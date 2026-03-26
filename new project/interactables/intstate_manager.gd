@@ -1,9 +1,9 @@
 extends Node
 
 
-var keys: Dictionary[String, Key]
+var keys: Dictionary[String, IntState]
 
-func add_key(name: String, value: Key):
+func add_key(name: String, value: IntState):
 	if keys.has(name):
 		keys[name] = value.replace(keys[name].value)
 	else:
@@ -19,7 +19,7 @@ func get_key_value_or_0(name: String) -> int:
 		return 0
 
 func clear_key(name: String):
-	keys[name] = Key.new()
+	keys[name] = IntState.new()
 
 func delete_key(name: String):
 	keys.erase(name)

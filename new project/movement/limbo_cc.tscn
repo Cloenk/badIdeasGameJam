@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://px0oaxvephqf" path="res://movement/limbo_cc_scripts/freefall.gd" id="11_5al2k"]
 [ext_resource type="Script" uid="uid://evmd00jll4hq" path="res://movement/limbo_cc_scripts/glide.gd" id="12_tguxa"]
 [ext_resource type="Script" uid="uid://felfw7ml6hyo" path="res://movement/limbo_cc_scripts/ledge_climb.gd" id="15_fvj4u"]
-[ext_resource type="PackedScene" uid="uid://c5lm540u5pgpn" path="res://interactables/key_holder.tscn" id="16_ywe5y"]
+[ext_resource type="PackedScene" uid="uid://c5lm540u5pgpn" path="res://interactables/intstate_manager.tscn" id="16_ywe5y"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8regx"]
 friction = 0.3
@@ -139,7 +139,7 @@ script = ExtResource("12_tguxa")
 [node name="LedgeClimb" type="LimboState" parent="Movement" unique_id=671497931]
 script = ExtResource("15_fvj4u")
 
-[node name="KeyHolder" parent="." unique_id=427082125 instance=ExtResource("16_ywe5y")]
+[node name="IntStateManager" parent="." unique_id=427082125 instance=ExtResource("16_ywe5y")]
 
 [connection signal="body_shape_entered" from="." to="Movement" method="_on_body_shape_entered"]
 [connection signal="body_shape_exited" from="." to="Movement" method="_on_body_shape_exited"]
