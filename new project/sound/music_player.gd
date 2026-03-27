@@ -2,7 +2,6 @@ extends AudioStreamPlayer
 
 var track_id: String
 var is_fading_out: bool = false
-@onready var timer: Timer = $Timer
 
 func start_after(time: float):
 	if time == 0:
