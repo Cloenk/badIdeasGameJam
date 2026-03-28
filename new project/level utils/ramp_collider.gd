@@ -133,9 +133,13 @@ func make_arraymesh():
 	arr_mesh.resource_local_to_scene = true
 	mesh_instance_3d.mesh = arr_mesh
 
+@export var show_debug_mesh_in_game: bool = false
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		mesh_instance_3d.queue_free()
+		if show_debug_mesh_in_game:
+			make_arraymesh()
+		else:
+			mesh_instance_3d.queue_free()
 	else:
 		make_arraymesh()
