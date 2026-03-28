@@ -7,11 +7,11 @@ enum ReplaceMode {Replace, Max, Min, Add, Subtract, SubtractRev, SubtractOrZero,
 @export var replace_mode: ReplaceMode = ReplaceMode.Replace
 @export var blend_fac: float
 
-static func new_intstate(replace_mode: ReplaceMode, value: int, blend_fac: float = 0.5) -> IntState:
+static func new_intstate(replace: ReplaceMode, val: int, blend: float = 0.5) -> IntState:
 	var res = IntState.new()
-	res.value = value
-	res.replace_mode = replace_mode
-	res.blend_fac = blend_fac
+	res.value = val
+	res.replace_mode = replace
+	res.blend_fac = blend
 	return res
 
 func replace(old: int) -> IntState:

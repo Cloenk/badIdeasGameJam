@@ -3,29 +3,29 @@ extends Node
 
 var keys: Dictionary[String, IntState]
 
-func set_key(name: String, value: IntState):
-	if keys.has(name):
-		keys[name] = value.replace(keys[name].value)
+func set_key(keyname: String, value: IntState):
+	if keys.has(keyname):
+		keys[keyname] = value.replace(keys[keyname].value)
 	else:
-		keys[name] = value.replace(0)
+		keys[keyname] = value.replace(0)
 
-func has_key(name: String) -> bool:
-	return keys.has(name)
+func has_key(keyname: String) -> bool:
+	return keys.has(keyname)
 
-func key_above_zero(name: String) -> bool:
-	if keys.has(name):
-		return keys[name].value > 0
+func key_above_zero(keyname: String) -> bool:
+	if keys.has(keyname):
+		return keys[keyname].value > 0
 	else:
 		return false
 
-func get_key_value_or_0(name: String) -> int:
-	if keys.has(name):
-		return keys[name].value
+func get_key_value_or_0(keyname: String) -> int:
+	if keys.has(keyname):
+		return keys[keyname].value
 	else:
 		return 0
 
-func clear_key(name: String):
-	keys[name] = IntState.new()
+func clear_key(keyname: String):
+	keys[keyname] = IntState.new()
 
-func delete_key(name: String):
-	keys.erase(name)
+func delete_key(keyname: String):
+	keys.erase(keyname)
