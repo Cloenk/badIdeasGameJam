@@ -23,7 +23,7 @@ var has_valid_nodepath: bool = false
 		relative = value
 		if auto_update and self.ready:
 			update_cable_path()
-@export var point_count: int = 10:
+@export_range(0, 100, 1) var point_count: int = 10:
 	set(value):
 		point_count = value
 		if auto_update and self.ready:
